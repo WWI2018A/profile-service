@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 })
 
 //Search for User by userID
-router.get('/:userID', function(req, res, next){
+router.get('/uid/:userID', function(req, res, next){
     UserData.find({_id: req.params.userID}, function(err, users){
         if (err) {
             res.send('No Users found');
@@ -30,8 +30,22 @@ router.get('/:userID', function(req, res, next){
     });
 })
 
+//Search for User by userID
+router.get('/name/:name', function(req, res, next){
+    UserData.find({name: req.params.name}, function(err, users){
+        if (err) {
+            res.send('No Users found');
+            return next(err)
+          } else {
+            res.send(users);
+            console.log('User '+ req.params.name + ' found and listed');
+          }
+        
+    });
+})
+
 //Create new User
-router.post('/', function(req, res, next){
+router.post('/uid/', function(req, res, next){
 
     var newUser = {
         name: req.body.name,
@@ -50,27 +64,27 @@ router.post('/', function(req, res, next){
 })
 
 //Change existing user
-router.put('/:userID', function(req, res, next){
-    UserData.updateMany({_id: req.params.userID}, function(err, users){
+router.put('/uid/:userID', function(req, res, next){
+    UserData.findOneAndUpdate({_id: req.params.userID}, req.body, {new: true}, function(err, users){
         if (err) {
             res.send('No Users found');
             return next(err)
           } else {
             console.log('User '+ req.params.userID + ' was changed');
-            res.send('User '+ users.params.userID + ' was changed');
+            res.send('User '+ req.params.userID + ' was changed');
           }
     })
 })
 
 //Delete existing user
-router.delete('/:userID', function( req, res, next){
+router.delete('/uid/:userID', function( req, res, next){
     UserData.findOneAndDelete({_id: req.params.userID}, function(err, users){
         if (err) {
             res.send('No Users found');
             return next(err)
           } else {
             console.log('User '+ req.params.userID + ' was deleted');
-            res.send('User '+ users.params.userID + ' was deleted');
+            res.send('User '+ req.params.userID + ' was deleted');
           }
         })
 })

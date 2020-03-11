@@ -16,11 +16,13 @@ All Endpoints:
         -> Hello World!
     '/api/v1/profiles/' 
         -> GET: list all existing users
-    /api/v1/profiles/:userID'/ 
-        -> GET: search for User by ID given in the URL
         -> POST: create new User from a JSON given in the body of the request
+    '/api/v1/profiles/uid/:userID' 
+        -> GET: search for User by ID given in the URL
         -> PUT: search for User by ID given in the URL and change with a JSON given in the body of the request
         -> DELETE: search for User by ID given in the URL and delete
+    '/api/v1/profiles/name/:name'
+        -> GET: search for User by name given in the URL
 
 Database:
     MongoDB
