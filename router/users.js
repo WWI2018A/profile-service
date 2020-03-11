@@ -19,8 +19,14 @@ router.get('/', function(req, res, next) {
 //Search for User by userID
 router.get('/:userID', function(req, res, next){
     UserData.find({_id: req.params.userID}, function(err, users){
-        res.send(users);
-        console.log('User '+ req.params.userID + ' found and listed');
+        if (err) {
+            res.send('No Users found');
+            return next(err)
+          } else {
+            res.send(users);
+            console.log('User '+ req.params.userID + ' found and listed');
+          }
+        
     });
 })
 
@@ -38,22 +44,35 @@ router.post('/', function(req, res, next){
             return next(err)
           } else {
             console.log('Data saved!');
-
+            res.json(201, newUser);
           }
     })
-    res.json(201, newUser);
-    console.log('New User created');
 })
 
 //Change existing user
 router.put('/:userID', function(req, res, next){
-    console.log('User '+ req.params.userID + ' was changed');
+    UserData.updateMany({_id: req.params.userID}, function(err, users){
+        if (err) {
+            res.send('No Users found');
+            return next(err)
+          } else {
+            console.log('User '+ req.params.userID + ' was changed');
+            res.send('User '+ users.params.userID + ' was changed');
+          }
+    })
 })
 
 //Delete existing user
 router.delete('/:userID', function( req, res, next){
-    console.log('User '+ req.params.userID + ' was deleted');
-    res.send('User '+ req.params.userID + ' was deleted');
+    UserData.findOneAndDelete({_id: req.params.userID}, function(err, users){
+        if (err) {
+            res.send('No Users found');
+            return next(err)
+          } else {
+            console.log('User '+ req.params.userID + ' was deleted');
+            res.send('User '+ users.params.userID + ' was deleted');
+          }
+        })
 })
 
 module.exports = router;

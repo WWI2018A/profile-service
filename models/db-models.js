@@ -6,6 +6,8 @@ const UserDataSchema = new mongoose.Schema({
   name: String,
   roles: String,
   description: String
+}, {
+  versionKey: false // No automatic version key will be generated
 });
 
 //Create model of Schema
