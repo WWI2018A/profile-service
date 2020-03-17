@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const app = require('../app');
-const UserData = require('../models/db-models');
+const ProfileData = require('../models/db-models');
 
 //Test the routes
 router.get('/test', (req, res, next) => {
@@ -10,81 +10,69 @@ router.get('/test', (req, res, next) => {
 
 //GET all available Users
 router.get('/', function(req, res, next) {
-    UserData.find(function(err, users){
-        res.send(users);
-        console.log('All Users were listed');
+    ProfileData.find(function(err, profiles){
+        res.send(profiles);
+        console.log('All profiles were listed');
     });
 })
 
 //Search for User by userID
-router.get('/uid/:userID', function(req, res, next){
-    UserData.find({_id: req.params.userID}, function(err, users){
+router.get('/:uid', function(req, res, next){
+    ProfileData.find({user_id: req.params.uid}, function(err, profiles){
         if (err) {
-            res.send('No Users found');
+            res.send('No user data found');
             return next(err)
           } else {
-            res.send(users);
-            console.log('User '+ req.params.userID + ' found and listed');
-          }
-        
-    });
-})
-
-//Search for User by userID
-router.get('/name/:name', function(req, res, next){
-    UserData.find({name: req.params.name}, function(err, users){
-        if (err) {
-            res.send('No Users found');
-            return next(err)
-          } else {
-            res.send(users);
-            console.log('User '+ req.params.name + ' found and listed');
+            res.send(profiles);
+            console.log('Data of user '+ req.params.uid + ' found and listed');
           }
         
     });
 })
 
 //Create new User
-router.post('/uid/', function(req, res, next){
+router.post('/', function(req, res, next){
 
-    var newUser = {
+    var newProfile = {
+        user_id: req.body.user_id,
         name: req.body.name,
+        prename: req.body.prename,
         roles: req.body.roles,
         description: req.body.description
     }
 
-    UserData.create(newUser, function (err, user){
+    ProfileData.create(newProfile, function (err, profile){
         if (err) {
             return next(err)
           } else {
-            console.log('Data saved!');
-            res.json(201, newUser);
+            console.log('user data saved!');
+            res.json(201, newProfile);
           }
     })
 })
 
 //Change existing user
-router.put('/uid/:userID', function(req, res, next){
-    UserData.findOneAndUpdate({_id: req.params.userID}, req.body, {new: true}, function(err, users){
+router.put('/:uid', function(req, res, next){
+    ProfileData.findOneAndUpdate({user_id: req.params.uid}, req.body, {new: true}, function(err, profiles){
         if (err) {
-            res.send('No Users found');
+            res.send('no user data found');
             return next(err)
           } else {
-            console.log('User '+ req.params.userID + ' was changed');
-            res.send('User '+ req.params.userID + ' was changed');
+            console.log('data of user '+ req.params.uid + ' was changed');
+            res.send('data of user '+ req.params.uid + ' was changed');
           }
     })
 })
 
 //Delete existing user
-router.delete('/uid/:userID', function( req, res, next){
-    UserData.findOneAndDelete({_id: req.params.userID}, function(err, users){
+router.delete('/:uid', function( req, res, next){
+    ProfileData.findOneAndDelete({user_id: req.params.uid}, function(err, profiles){
         if (err) {
-            res.send('No Users found');
+            res.send('no users found');
             return next(err)
           } else {
-            console.log('User '+ req.params.userID + ' was deleted');
-            res.send('User '+ req.params.userID + ' was deleted');
+            console.log('data of user '+ req.params.uid + ' was deleted');
+            res.send('data of user '+ req.params.uid + ' was deleted');
           }
         })
 })

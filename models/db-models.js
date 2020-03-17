@@ -2,8 +2,10 @@
 const mongoose = require('mongoose');
 
 //Create Schema
-const UserDataSchema = new mongoose.Schema({
+const ProfileDataSchema = new mongoose.Schema({
+  user_id: String,
   name: String,
+  prename: String,
   roles: String,
   description: String
 }, {
@@ -11,5 +13,5 @@ const UserDataSchema = new mongoose.Schema({
 });
 
 //Create model of Schema
-var UserData = mongoose.model('UserData', UserDataSchema);
-module.exports = UserData;
+var ProfileData = mongoose.model('UserData', ProfileDataSchema);
+module.exports = ProfileData;
