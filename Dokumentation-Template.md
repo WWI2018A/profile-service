@@ -15,7 +15,7 @@ GET /profiles
 Returns all profiles.
 
 * **URL:**
-/profiles
+api/v1/profiles
 
 * **Method:**
 
@@ -25,30 +25,30 @@ Returns all profiles.
 
    **Required:**
  
-   `none`
+     `none`
 
    **Optional:**
  
-   `none`
+      `none`
 
 * **Data Params:**
 
-    `none`
+      `none`
 
 * **Success Response:**
   
   * **Code:** 200 OK <br />
     **Content:** 
      ```json
-    {
-      "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-      "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-      "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-      "createdOn": "1996-10-15T00:05:32.000Z",
-      "dueUntil": "1996-10-16T00:05:32.000Z",
-      "status": "COMPLETED",
-      "content": "Aufgabe XY machen"
+    [ { 
+      "_id":"5e6bb4452cb2927da4eaf11d",
+      "user_id":"45e6bb3352cb2sdf5a4eaf11d",
+      "name":"Name",
+      "prename":"Prename",
+      "roles":"Member",
+      "description":"I am a desription"
     }
+    {"..."}]
     ```
 
  
@@ -84,7 +84,7 @@ Returns all profiles.
 
 * **Sample JSON mock files:**
 
-  `GetTodosIdResponse.json`
+  `GetProfilesResponse.json`
 
 * **Notes:**
 
@@ -97,13 +97,14 @@ GET /profiles/{id}
   
 * **URL:**
 
-  /profiles/{id}
+  api/v1/profiles/{id}
 
 * **Method:**
 
   `GET`
   
 *  **URL Params:**
+    `user_id`
 
    **Required:**
  
@@ -123,13 +124,12 @@ GET /profiles/{id}
     **Content:** 
      ```json
     {
-      "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-      "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-      "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-      "createdOn": "1996-10-15T00:05:32.000Z",
-      "dueUntil": "1996-10-16T00:05:32.000Z",
-      "status": "COMPLETED",
-      "content": "Aufgabe XY machen"
+      "_id":"5e6bb4452cb2927da4eaf11d",
+    "user_id":"45e6bb3352cb2sdf5a4eaf11d",
+    "name":"Name",
+    "prename":"Prename",
+    "roles":"Member",
+    "description":"I am a desription"
     }
     ```
 
@@ -140,7 +140,7 @@ GET /profiles/{id}
     **Content:** 
     ```json
     {
-      "error" : "Could not find the todo with the id: [id]" 
+      "error" : "Could not find the profile with the id: [id]" 
     }
     ```
 
@@ -166,26 +166,28 @@ GET /profiles/{id}
 
 * **Sample JSON mock files:**
 
-  `GetTodosIdResponse.json`
+  `GetProfilesResponse.json`
 
 * **Notes:**
 
 ***
 
 POST /profiles/
-   ----
+----
    
    Creates a new profile.
      
    * **URL:**
    
-     /todos/uid
+     api/v1/profiles/
    
    * **Method:**
    
      `POST`
      
    *  **URL Params:**
+
+      `none`
    
       **Required:**
     
@@ -199,11 +201,11 @@ POST /profiles/
    
        ```json
        {
-         "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueUntil": "1996-10-16T00:05:32.000Z",
-         "status": "OPEN",
-         "content": "Aufgabe XY machen"
+          "user_id":"45e6bb3352cb2sdf5a4eaf11d",
+          "name":"Name",
+          "prename":"Prename",
+          "roles":"Member",
+          "description":"I am a desription"
        }
        ```
    
@@ -213,14 +215,13 @@ POST /profiles/
        **Content:** 
         ```json
        {
-         "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-         "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "createdOn": "1996-10-15T00:05:32.000Z",
-         "dueUntil": "1996-10-16T00:05:32.000Z",
-         "status": "OPEN",
-         "content": "Aufgabe XY machen"
-       }
+          "_id":"5e6bb4452cb2927da4eaf11d",
+          "user_id":"45e6bb3352cb2sdf5a4eaf11d",
+          "name":"Name",
+          "prename":"Prename",
+          "roles":"Member",
+          "description":"I am a desription"
+}
        ```
    
     
@@ -247,8 +248,8 @@ POST /profiles/
    
    * **Sample JSON mock files:**
    
-     `PostTodosRequest.json`<br>
-     `PostTodosResponse.json`
+     `PostProfilesRequest.json`<br>
+     `PostProfilesResponse.json`
    
    * **Notes:**
    
@@ -256,19 +257,20 @@ POST /profiles/
    
     
 
-PUT /todos/{id}
-     ----
+PUT /profiles/{id}
+----
      Updates a todo with the given todo-id.
      
    * **URL:**
    
-     /todos/{id}
+     api/v1/profiles/{id}
    
    * **Method:**
    
      `PUT`
      
    *  **URL Params:**
+       `user_id`
    
       **Required:**
     
@@ -282,11 +284,11 @@ PUT /todos/{id}
    
        ```json
        {
-         "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "dueUntil": "1996-10-16T00:05:32.000Z",
-         "status": "DONE",
-         "content": "Aufgabe XY machen"
+          
+          "name":"Name",
+          "prename":"Prename",
+          "roles":"Member",
+          "description":"I am a desription"
        }
        ```
    
@@ -296,13 +298,12 @@ PUT /todos/{id}
        **Content:** 
         ```json
        {
-         "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-         "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-         "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-         "createdOn": "1996-10-15T00:05:32.000Z",
-         "dueUntil": "1996-10-16T00:05:32.000Z",
-         "status": "DONE",
-         "content": "Aufgabe XY machen"
+          "_id":"5e6bb4452cb2927da4eaf11d",
+          "user_id":"45e6bb3352cb2sdf5a4eaf11d",
+          "name":"Name",
+          "prename":"Prename",
+          "roles":"Member",
+          "description":"I am a desription"
        }
        ```
        
@@ -311,13 +312,12 @@ PUT /todos/{id}
          **Content:** 
           ```json
          {
-           "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-           "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-           "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-           "createdOn": "1996-10-15T00:05:32.000Z",
-           "dueUntil": "1996-10-16T00:05:32.000Z",
-           "status": "DONE",
-           "content": "Aufgabe XY machen"
+            "_id":"5e6bb4452cb2927da4eaf11d",
+            "user_id":"45e6bb3352cb2sdf5a4eaf11d",
+            "name":"Name",
+            "prename":"Prename",
+            "roles":"Member",
+            "description":"I am a desription"
          }
          ```
     
@@ -344,122 +344,30 @@ PUT /todos/{id}
    
    * **Sample JSON mock files:**
    
-     `PutTodosIdRequest.json`<br>
-     `PutTodosIdResponse.json`
+     `PutProfilesRequest.json`<br>
+     `PutProfilesResponse.json`
+
    
    * **Notes:**
    
    ***
    
 
-PUT /todos/{id}
+
+DELETE /profiles/{id}
   ----
-  Updates a todo with the given todo-id.
+  Deletes a profile with the given profile-id.
   
 * **URL:**
 
-  /todos/{id}
-
-* **Method:**
-
-  `PUT`
-  
-*  **URL Params:**
-
-   **Required:**
- 
-   `id=[string]`
-
-   **Optional:**
- 
-   `none`
-
-* **Data Params:**
-
-    ```json
-    {
-      "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-      "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-      "dueUntil": "1996-10-16T00:05:32.000Z",
-      "status": "DONE",
-      "content": "Aufgabe XY machen"
-    }
-    ```
-
-* **Success Response:**
-  
-  * **Code:** 200 OK <br />
-    **Content:** 
-     ```json
-    {
-      "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-      "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-      "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-      "createdOn": "1996-10-15T00:05:32.000Z",
-      "dueUntil": "1996-10-16T00:05:32.000Z",
-      "status": "DONE",
-      "content": "Aufgabe XY machen"
-    }
-    ```
-    
-  OR:
-  * **Code:** 201 CREATED <br />
-      **Content:** 
-       ```json
-      {
-        "todo-id": "todo-41723ac1-85c6-4520-a876-0d3388092e65",
-        "user-id": "user-ffb7c974-342b-4e58-8d9c-768fe5718ff5",
-        "list-id": "list-31877f02-45ff-4eac-8af1-b3ee50fec49a",
-        "createdOn": "1996-10-15T00:05:32.000Z",
-        "dueUntil": "1996-10-16T00:05:32.000Z",
-        "status": "DONE",
-        "content": "Aufgabe XY machen"
-      }
-      ```
- 
-* **Error Response:**
-
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** 
-    ```json
-    {
-      "error" : "An error occurred." 
-    }
-    ```
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
-    ```json
-    {
-      "error" : "Unauthorized."
-    }
-    ```
-    
-
-* **Sample JSON mock files:**
-
-  `PutTodosIdRequest.json`<br>
-  `PutTodosIdResponse.json`
-
-* **Notes:**
-
-***
-
-DELETE /todos/{id}
-  ----
-  Deletes a todo with the given todo-id.
-  
-* **URL:**
-
-  /todos/{id}
+  api/v1/profiles/{id}
 
 * **Method:**
 
   `DELETE`
   
 *  **URL Params:**
+  `user_id`
 
    **Required:**
  
@@ -510,8 +418,7 @@ DELETE /todos/{id}
 
 * **Sample JSON mock files:**
 
-  `PutTodosIdRequest.json`<br>
-  `PutTodosIdResponse.json`
+
 
 * **Notes:**
 
