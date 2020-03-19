@@ -7,6 +7,11 @@ const ProfileDataSchema = new mongoose.Schema({
   name: String,
   prename: String,
   roles: String,
+  profileImage: {
+    type: String,
+    required: true,
+    default: 'https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1584618721/ProfileService/account_vk4swl.png'
+  },
   description: String
 }, {
   versionKey: false // No automatic version key will be generated
