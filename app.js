@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+const path = require('path');
 
 //Necessary for reading request bodies
 app.use(bodyParser.json({limit: '1000mb', extended: true}))
@@ -9,6 +10,7 @@ app.use(bodyParser.urlencoded({limit: '1000mb', extended: true}))
 //connect to MongoDB
 //Define Mongoose
 var mongoose = require('mongoose');
+
 
 //Set new Parameters for Deprecation Warning
 mongoose.set('useNewUrlParser', true);
@@ -25,6 +27,11 @@ mongoose.connect("mongodb+srv://dbUser:start123@todo-profilesvc-sprud.mongodb.ne
   console.error('Database connection error')
   throw err;
 })
+
+// View Setup for testing
+app.set('views', path.join(__dirname, 'views'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 
 app.get('/', function (req, res) {
