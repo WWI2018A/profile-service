@@ -28,8 +28,11 @@ mongoose.connect("mongodb+srv://dbUser:start123@todo-profilesvc-sprud.mongodb.ne
   throw err;
 })
 
-// View Setup for testing
-app.set('views', path.join(__dirname, 'views'));
+// Mount location of the relativ path (stylesheets usw.) 
+app.use(express.static(__dirname + '/public'));
+// Root location of views.
+app.set('views','./public/views');
+// View Setup
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 

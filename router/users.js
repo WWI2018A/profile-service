@@ -93,29 +93,12 @@ router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, ne
 
     // User did not input any Picture
     if(req.file === undefined) {
-        var err = new Error("Please select a picture before commiting.")
+        var err = new Error("Please select a picture before commiting.");
+        res.send(err.message);
     }
 
     else {
-        var fileTypeIsValid = ({req}) => {
-
-            // Check if the filetype is valid
-            var validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-            var fileType = req.file.mimetype;
-
-            console.log('fileType', fileType);
-
-            // Compare fileType with the valid file types.
-            for (var i=0; i<validFileTypes.length; i++) {
-
-                if(fileType !== undefined) {
-
-                    if(fileType.toString() === validFileTypes[i]) return true;
-                }
-            }
-
-            return false;
-        }
+        var fileTypeIsValid = checkFileType({req});
     }
 
     switch(fileTypeIsValid) {
@@ -138,31 +121,37 @@ router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, ne
 
         secure: true,
         folder: "ProfileService",
-        transformation: [{width: 150, height: 150, crop: "fit"}]
+        transformation: [{width: 300, height: 300, crop: "fit"}]
     })
 
-    var profiles = profileData.find({});
-    console.log((profiles));
+    // This is the location of the uploaded Picture. You just have to add it to the user database now.
+    console.log(result.secure_url);
 
-    // Update the picture reference in the user table.
-    ProfileData.updateOne(
-        {"username" : req.user.username},
-        {$set: { "profilePicture": result.secure_url,
-                "profilePictureId": result.public_id}},
-
-        // Work with the result.
-        (err, result) => {
-
-            if(err) console.log(err);
-            else {
-
-                console.log('File', req.file);
-
-                // Prepare success message
-                console.log('Profile picture succesfully changed.');
-            };
-        });
-
+    // Redirect to the same page, put this time the new profile picture has to be loaded into the html!
+    res.redirect('/api/v1/profiles/test/profile');
 });
 
+
+// --- Functions -----------------------------------------------------
+function checkFileType({req}) {
+
+    // Check if the filetype is valid
+    var validFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    var fileType = req.file.mimetype;
+
+    console.log('fileType', fileType);
+
+    // Compare fileType with the valid file types.
+    for (var i=0; i<validFileTypes.length; i++) {
+
+        if(fileType !== undefined) {
+
+            if(fileType.toString() === validFileTypes[i]) return true;
+        }
+    }
+
+    return false;
+}
+
+// Export
 module.exports = router;
