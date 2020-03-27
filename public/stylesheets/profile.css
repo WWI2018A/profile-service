@@ -1,0 +1,8 @@
+.profilePictureLarge {
+    width: 150px;
+    height: 150px;
+    margin: 4%0%3%0%;
+    border-radius: 50%;
+    border:2px solid white;
+    object-fit: cover;
+}
