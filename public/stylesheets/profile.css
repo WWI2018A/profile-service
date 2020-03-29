@@ -6,3 +6,12 @@
     border:2px solid white;
     object-fit: cover;
 }
+
+.form-group {
+    width: auto;
+}
+
+.profilecontainer {
+    width: 70vw;
+    margin: 0 auto;
+}

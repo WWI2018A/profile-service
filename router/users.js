@@ -8,31 +8,32 @@ require('../config/cloudinaryConfig');
 
 // -------------------------------------------
 
-//Test the routes
-router.get('/test', (req, res, next) => {
-    res.send('Hello I am a user');
-});
-
-//GET all available Users
-router.get('/', function(req, res, next) {
-    ProfileData.find(function(err, profiles){
-        res.send(profiles);
-        console.log('All profiles were listed');
-    });
-})
-
-//Search for User by userID
-router.get('/:uid', function(req, res, next){
-    ProfileData.find({user_id: req.params.uid}, function(err, profiles){
+//GET User:
+// - Check if Header uID exists
+// - if yes find and list user by user-id
+// - else list all users
+router.get('/', function(req, res, next){
+    
+    console.log(req.session)
+    var headerExists = req.headers;
+    
+    if(headerExists) {
+    ProfileData.find({user_id: req.headers.uid}, function(err, profiles){
         if (err) {
             res.send('No user data found');
             return next(err)
           } else {
             res.send(profiles);
-            console.log('Data of user '+ req.params.uid + ' found and listed');
-          }
-        
+            console.log('Data of user '+ req.headers.uid + ' (' + profiles[0].name +', ' + profiles[0].prename + ') ' + ' found and listed');
+          } 
     });
+    }
+    else {
+        ProfileData.find(function(err, profiles){
+            res.send(profiles);
+            console.log('All profiles were listed'); 
+    })
+}
 })
 
 //Create new User
@@ -57,16 +58,28 @@ router.post('/', function(req, res, next){
 })
 
 //Change existing user
-router.put('/:uid', function(req, res, next){
-    ProfileData.findOneAndUpdate({user_id: req.params.uid}, req.body, {new: true}, function(err, profiles){
+router.put('/', function(req, res, next){
+    
+    var headerExists = req.headers.uid;
+    
+    if(headerExists) {
+    console.log(req.body)
+    ProfileData.findOneAndUpdate({user_id: req.headers.uid}, req.body, {new: true}, function(err, profiles){
         if (err) {
             res.send('no user data found');
             return next(err)
           } else {
-            console.log('data of user '+ req.params.uid + ' was changed');
-            res.send('data of user '+ req.params.uid + ' was changed');
+            console.log(profiles)
+            console.log('data of user '+ req.headers.uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
+            res.send('data of user '+ req.headers.uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
           }
     })
+}
+else {
+    var err = new Error("Please specify a User-ID.");
+    res.send(err.message);
+    next();
+}
 })
 
 //Delete existing user
@@ -90,7 +103,8 @@ router.get('/test/profile', (req, res, next) => {
 
 // Change the profile picture.
 router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, next) => {
-
+    console.log(req.body)
+    
     // User did not input any Picture
     if(req.file === undefined) {
         var err = new Error("Please select a picture before commiting.");
@@ -126,9 +140,26 @@ router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, ne
 
     // This is the location of the uploaded Picture. You just have to add it to the user database now.
     console.log(result.secure_url);
+    var newProfile = {
+        profileImage: result.secure_url,
+        user_id: req.body.user_id,
+        name: req.body.name,
+        prename: req.body.prename,
+        roles: req.body.roles,
+        description: req.body.description
+    }
 
+    ProfileData.create(newProfile, function (err, profile){
+        if (err) {
+            return next(err)
+          } else {
+            console.log('user data saved!');
+            console.log(newProfile);
+          }
+    })
+    var route = '/api/v1/profiles/'
     // Redirect to the same page, put this time the new profile picture has to be loaded into the html!
-    res.redirect('/api/v1/profiles/test/profile');
+    res.redirect(route);
 });
 
 
