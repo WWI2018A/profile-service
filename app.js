@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
+var morgan = require('morgan')
+app.use(morgan('tiny'));
 
 //Necessary for reading request bodies
 app.use(bodyParser.json({limit: '1000mb', extended: true}))

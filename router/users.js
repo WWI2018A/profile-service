@@ -14,8 +14,7 @@ require('../config/cloudinaryConfig');
 // - else list all users
 router.get('/', function(req, res, next){
     
-    console.log(req.session)
-    var headerExists = req.headers;
+    var headerExists = req.headers.uid;
     
     if(headerExists) {
     ProfileData.find({user_id: req.headers.uid}, function(err, profiles){
@@ -23,7 +22,7 @@ router.get('/', function(req, res, next){
             res.send('No user data found');
             return next(err)
           } else {
-            res.send(profiles);
+            res.send(profiles);  
             console.log('Data of user '+ req.headers.uid + ' (' + profiles[0].name +', ' + profiles[0].prename + ') ' + ' found and listed');
           } 
     });
@@ -44,7 +43,8 @@ router.post('/', function(req, res, next){
         name: req.body.name,
         prename: req.body.prename,
         roles: req.body.roles,
-        description: req.body.description
+        description: req.body.description,
+        skills: req.body.skillselect
     }
 
     ProfileData.create(newProfile, function (err, profile){
@@ -63,13 +63,11 @@ router.put('/', function(req, res, next){
     var headerExists = req.headers.uid;
     
     if(headerExists) {
-    console.log(req.body)
     ProfileData.findOneAndUpdate({user_id: req.headers.uid}, req.body, {new: true}, function(err, profiles){
         if (err) {
             res.send('no user data found');
             return next(err)
           } else {
-            console.log(profiles)
             console.log('data of user '+ req.headers.uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
             res.send('data of user '+ req.headers.uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
           }
@@ -146,7 +144,8 @@ router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, ne
         name: req.body.name,
         prename: req.body.prename,
         roles: req.body.roles,
-        description: req.body.description
+        description: req.body.description,
+        skills: req.body.skillselect
     }
 
     ProfileData.create(newProfile, function (err, profile){

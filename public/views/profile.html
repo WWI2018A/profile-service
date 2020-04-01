@@ -1,112 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- Required for scripts to work. -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- Required for scripts to work. -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script defer src="/scripts/index.js"></script>
+  <!-- Custom css -->
+  <link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
 
-    <!-- Custom css -->
-    <link rel="stylesheet" type="text/css" href="/stylesheets/profile.css" >
-
-    <title>Profile</title>
+  <title>Profile</title>
 </head>
 
 
 <body class="profileBody" onload="displayProfilePicture()">
 
-    <!-- Page content -->
-    <div class="container-fluid p-0">
-        <div class="row-no-gutters" style="width: 100%;"> <!-- dirty fix for row overlapping -->
+  <!-- Page content -->
+  <div class="container-fluid p-0">
+    <div class="row-no-gutters" style="width: 100%;">
+      <form action='/api/v1/profiles/profilePicture/change' method="post" enctype="multipart/form-data">
+        <div class="skilllogos">
+            <div class="skill1" id="skill1">
+            </div>
+            <div class="skill2" id="skill2">
+            </div>
+            <div class="skill3" id="skill3">
+            </div>
+            <div class="skill4" id="skill4">
+            </div>
+        </div>
+        <div class="center text-center">
 
-                <!-- Settings form, Profile Picture, Dark/Light mode, ... -->
-                <form action='/api/v1/profiles/profilePicture/change' method="post" enctype="multipart/form-data">
-                    <div class="col-lg-12 center text-center">
+          <label for="fileUpload2" class="center">
 
-                        <!-- The current profile picture, picture gets assigned though frontend JavaScript -->
-                        <label for="fileUpload" class="center">
+            <!-- The img src needs to be replaced with the current user Picture! -->
+            <img src="/images/Wallpaper.jpg" id="profileWallpaper" class="profileWallpaper" />
+          </label>
+          <!-- The current profile picture, picture gets assigned though frontend JavaScript -->
+          <label for="fileUpload" class="center">
 
-                            <!-- The img src needs to be replaced with the current user Picture! -->
-                            <img src="/images/Example.jpg" id="profilePictureLarge" class="profilePictureLarge"/>
-                        </label>
-
-                        <p>Click image to change Profile Picture</p>
-
-                        <input type='file' name='fileUpload' id='fileUpload' style="display: none;" />
-
-                    </div>
-                    <div class="profilecontainer">
-                        <div class="row">
-                        <div class="col">
-                          <div class="container1">
-                            <div class="form-group">
-                              <label for="name">Name:</label>
-                              <input type="text" class="form-control" id="name" name="name">
-                            </div>
-                          </div>
-                        </div>
-                        
-                            <div class="col">
-                              <div class="container1">
-                                <div class="form-group">
-                                  <label for="pname">Vorname:</label>
-                                  <input type="text" class="form-control" id="pname" name="prename">
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                            <div class="row">
-                                <div class="col">
-                                  <div class="container1">
-                                    <div class="form-group">
-                                      <label for="roles">Rolle:</label>
-                                      <input type="text" class="form-control" id="roles" name="roles">
-                                    </div>
-                                  </div>
-                                </div>
-                                    <div class="col">
-                                      <div class="container1">
-                                        <div class="form-group">
-                                          <label for="description">Beschreibung:</label>
-                                          <input type="text" class="form-control" id="description" name="description">
-                                        </div>
-                                      </div>
-                                    </div>
-                                    </div>
-                                  </div>
-                                    <div class="row">
-                                    <div class="col">
-                                      <div class="container1">
-                                        <div class="form-group">
-                                          <label for="user_id">User-ID:</label>
-                                          <input type="text" class="form-control" id="user_id" name="user_id">
-                                        </div>
-                                      </div>
-                                    </div>
-                                    </div>
-
-                    <!-- Button which submits the form.-->
-                    <div class="col-lg-12 center text-center">
-                        <button class="btn btn-primary applySettingsButton roundCorners gradient330Deg" type="submit">Apply Changes</button>
-                    </div>
-                </form>
+            <!-- The img src needs to be replaced with the current user Picture! -->
+            <img src="/images/Example.jpg" id="profilePictureLarge" class="profilePictureLarge" />
+          </label>
 
         </div>
+
+        <p>Click image to change Profile Picture</p>
+
+        <input type='file' name='fileUpload' id='fileUpload' style="display: none;" />
+
+
+        <div class="profilecontainer">
+          <div class="row">
+            <div class="col">
+              <div class="container1">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input type="text" class="form-control" id="name" name="name">
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="container1">
+                <div class="form-group">
+                  <label for="pname">Vorname:</label>
+                  <input type="text" class="form-control" id="pname" name="prename">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="container1">
+                <div class="form-group">
+                  <label for="roles">Rolle:</label>
+                  <input type="text" class="form-control" id="roles" name="roles">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="container1">
+                <div class="form-group">
+                  <label for="description">Beschreibung:</label>
+                  <input type="text" class="form-control" id="description" name="description">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="container1">
+                <div class="form-group">
+                  <label for="user_id">User-ID:</label>
+                  <input type="text" class="form-control" id="user_id" name="user_id">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="container1">
+                <div class="form-group">
+                  <label for="trnsp">Skills:</label>
+                  <select id="skillselect" class="form-control input-sm" name="skillselect" multiple size="10">
+                    <option value="html">HTML</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="python">Python</option>
+                    <option value="c">C/C++</option>
+                    <option value="android">Android</option>
+                    <option value="docker">Docker</option>
+                    <option value="php">PHP</option>
+                    <option value="swift">Swift</option>
+                    <option value="angular">Angular</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 center text-center">
+              <button class="btn btn-primary applySettingsButton roundCorners gradient330Deg" type="submit">Apply
+                Changes</button>
+            </div>
+          </div>
+
+          <!-- Button which submits the form.-->
+
+      </form>
+
     </div>
+  </div>
 
 </body>
 
 <!-- Scripts -->
 
 
-    
+
 
 </script>
 
