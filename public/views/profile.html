@@ -34,7 +34,7 @@
   <!-- Page content -->
   <div class="container-fluid p-0">
     <div class="row-no-gutters" style="width: 100%;">
-      <form action='/api/v1/profiles/profilePicture/change' method="post" enctype="multipart/form-data">
+
         <div class="skilllogos">
             <div class="skill1" id="skill1">
             </div>
@@ -47,101 +47,152 @@
         </div>
         <div class="center text-center">
 
-          <label for="fileUpload2" class="center">
 
             <!-- The img src needs to be replaced with the current user Picture! -->
             <img src="/images/Wallpaper.jpg" id="profileWallpaper" class="profileWallpaper" />
-          </label>
-          <!-- The current profile picture, picture gets assigned though frontend JavaScript -->
-          <label for="fileUpload" class="center">
+          <!-- The current profile picture, picture gets assigned though frontend JavaScript
+          <label for="fileUpload" class="center">-->
 
             <!-- The img src needs to be replaced with the current user Picture! -->
             <img src="/images/Example.jpg" id="profilePictureLarge" class="profilePictureLarge" />
-          </label>
+         <!-- </label> -->
 
         </div>
 
-        <p>Click image to change Profile Picture</p>
 
         <input type='file' name='fileUpload' id='fileUpload' style="display: none;" />
+        <input type='file' name='fileUpload2' id='fileUpload2' style="display: none;" />
 
 
-        <div class="profilecontainer">
-          <div class="row">
-            <div class="col">
-              <div class="container1">
-                <div class="form-group">
-                  <label for="name">Name:</label>
-                  <input type="text" class="form-control" id="name" name="name">
-                </div>
+        <div class="maininformation">
+          <button type="button" class="btn" data-toggle="modal" data-target="#myModal" style="float:right">
+            <i class="fas fa-user-edit editbutton" style="font-size: 20px; color: black;"></i>
+          </button>
+          <div class="row displayname" id="displayname"></div>
+          <div class="row displaysocialnetworks" id="displaysocialnetworks"></div>
+        </div>
+
+
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Benutzerdaten bearbeiten</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-            </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body center">
+                <form action='/api/v1/profiles/profilePicture/change' method="post" enctype="multipart/form-data"></form>
 
-            <div class="col">
-              <div class="container1">
-                <div class="form-group">
-                  <label for="pname">Vorname:</label>
-                  <input type="text" class="form-control" id="pname" name="prename">
+                <label for="fileUpload" class="center">
+                  <img src="/images/Example.jpg" id="profilePictureSmall" class="profilePictureSmall" />
+                </label>
+
+                <label for="fileUpload2" class="center">
+                  <img src="/images/Wallpaper.jpg" id="profileWallpaperSmall" class="profileWallpaperSmall" />
+                </label>
+
+                  <div class="col">
+                    <div class="container1">
+                      <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div class="col">
+                    <div class="container1">
+                      <div class="form-group">
+                        <label for="pname">Vorname:</label>
+                        <input type="text" class="form-control" id="pname" name="prename">
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="col">
+                    <div class="container1">
+                      <div class="form-group">
+                        <label for="roles">Rolle:</label>
+                        <input type="text" class="form-control" id="roles" name="roles">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="container1">
+                      <div class="form-group">
+                        <label for="description">Beschreibung:</label>
+                        <input type="text" class="form-control" id="description" name="description">
+                      </div>
+                    </div>
+                  </div>
+      
+                
+                  <div class="col">
+                    <div class="container1">
+                      <div class="form-group">
+                        <label for="user_id">User-ID:</label>
+                        <input type="text" class="form-control" id="user_id" name="user_id">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="container1">
+                      <div class="form-group">
+                        <label for="trnsp">Skills:</label>
+                        <select id="skillselect" class="form-control input-sm" name="skillselect" multiple size="10">
+                          <option value="html">HTML</option>
+                          <option value="javascript">JavaScript</option>
+                          <option value="java">Java</option>
+                          <option value="python">Python</option>
+                          <option value="c">C/C++</option>
+                          <option value="android">Android</option>
+                          <option value="docker">Docker</option>
+                          <option value="php">PHP</option>
+                          <option value="swift">Swift</option>
+                          <option value="angular">Angular</option>
+                        </select>
+                      </div>
+                    </div>
+                  
+                  <div class="col-lg-12 center text-center">
+                    <button class="btn btn-primary applySettingsButton roundCorners gradient330Deg" type="submit">Apply
+                      Changes</button>
+                  </div>
                 </div>
+              
+                <!-- Button which submits the form.-->
+              </form>
               </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+              
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <div class="container1">
-                <div class="form-group">
-                  <label for="roles">Rolle:</label>
-                  <input type="text" class="form-control" id="roles" name="roles">
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="container1">
-                <div class="form-group">
-                  <label for="description">Beschreibung:</label>
-                  <input type="text" class="form-control" id="description" name="description">
-                </div>
-              </div>
-            </div>
+        </div>
+  
+
+        <div class="extrainformation">
+          <div class="displaydescription" id="displaydescription">
           </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="container1">
-                <div class="form-group">
-                  <label for="user_id">User-ID:</label>
-                  <input type="text" class="form-control" id="user_id" name="user_id">
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="container1">
-                <div class="form-group">
-                  <label for="trnsp">Skills:</label>
-                  <select id="skillselect" class="form-control input-sm" name="skillselect" multiple size="10">
-                    <option value="html">HTML</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="java">Java</option>
-                    <option value="python">Python</option>
-                    <option value="c">C/C++</option>
-                    <option value="android">Android</option>
-                    <option value="docker">Docker</option>
-                    <option value="php">PHP</option>
-                    <option value="swift">Swift</option>
-                    <option value="angular">Angular</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-12 center text-center">
-              <button class="btn btn-primary applySettingsButton roundCorners gradient330Deg" type="submit">Apply
-                Changes</button>
-            </div>
+          <br>
+          <div class="displayrole" id="displayrole">
           </div>
+          <br>
+          <div class="displaycompany" id="displaycompany">
+          </div>
+          <br>
+          <div class="diplsayos" id="displayos">
+          </div>
+        </div>
 
-          <!-- Button which submits the form.-->
-
-      </form>
 
     </div>
   </div>

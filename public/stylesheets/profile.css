@@ -2,13 +2,41 @@
 .profilePictureLarge {
     width: 210px;
     height: 210px;
-    top: -980px;
+    top: -1050px;
     margin: 4%0%3%0%;
     border-radius: 50%;
     border:10px solid white;
     object-fit: cover;
     z-index: 3;
     position: relative;
+    transition: all ease-in-out .3s;
+}
+.profilePictureLarge:hover{
+    transform: scale(1.8);
+    border:1px solid red;
+}
+.profilePictureSmall {
+    width: 210px;
+    height: 210px; 
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto; 
+}
+.profileWallpaperSmall {
+    width: 400px;
+    height: 210px; 
+    object-fit: cover;
+}
+
+.displayname{
+    margin: 0 auto;
+    text-align: center;
+}
+.displaysocialnetworks{
+    margin: 0 auto;
+    margin-top: 10px; 
+    text-align: center;
+    width: 200px;
 }
 
 .skilllogos{
@@ -16,26 +44,37 @@
     height: 300px;
     position: relative;
     z-index: 2;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.3);
     padding-top: 30px;
     padding-left: 8px;
     border-radius: 50%;
     margin: 0 auto;
-    margin-top: 50px;   
+    margin-top: 50px;
+    transition: all ease-in-out .4s;  
 }
-
+.skilllogos:hover{
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.5);
+}
 .skill1 {
     margin-left: -150px;
     margin-right: 220px;
     margin-bottom: 15px;
     z-index: 4;
-    text-align: right;
+    text-align: center;
     position: relative;
     transition: all ease-in-out .4s;
+    clip-path: circle(15% at 95% 50%);
+    background-color: #ffffff00;
 }
 
 .logo {
+    position:absolute;
+    
+    top:0px;
+    right:0px;
     transition:ease-out .3s;
+    
 }
 
 
@@ -47,7 +86,7 @@
 .skill1:hover, .skill2:hover, .skill3:hover, .skill1:focus, .skill2:focus, .skill3:focus {
     transform: scale(1.1);
     clip-path: circle(75%);
-    border-radius:20px;
+    border-radius: 20px;
     box-shadow: 0px 3px 9px rgba(0,0,0,0.12),
                 0px 3px 18px rgba(0,0,0,0.08);
     background:#ffffff;
@@ -60,8 +99,10 @@
     margin-bottom: 20px;
     z-index: 4;
     position: relative;
-    text-align: right;
+    text-align: center;
     transition: all ease-in-out .4s;
+    clip-path: circle(15% at 95% 50%);
+    background-color: #ffffff00;
 }
 
 .skill3 {
@@ -69,9 +110,11 @@
     margin-right: 260px;
     margin-bottom: 20px;
     z-index: 4;
-    text-align: right;
+    text-align: center;
     position: relative;
     transition: all ease-in-out .4s;
+    clip-path: circle(15% at 95% 50%);
+    background-color: #ffffff00;
 }
 
 .profileWallpaper {
@@ -82,15 +125,28 @@
     z-index: 0;
     clip-path: polygon(0 0, 100% 0, 100% 30%, 0 70%);
     position: relative;
+    object-fit: cover;
 }
 
-.profilecontainer {
+.maininformation {
     position: relative;
     top: -950px;
     z-index: 1;
-}
-
-.profilecontainer {
     width: 70vw;
     margin: 0 auto;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #808080;
+}
+
+.extrainformation {
+    padding-top: 20px;
+    position: relative;
+    top: -950px;
+    z-index: 1;
+    width: 40vw;
+    margin: 0 auto;
+}
+
+.editbutton:hover {
+    transform: scale(1.2);
 }

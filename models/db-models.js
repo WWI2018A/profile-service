@@ -8,6 +8,9 @@ const ProfileDataSchema = new mongoose.Schema({
   prename: String,
   roles: String,
   skills: [String],
+  socialnetworks: [String],
+  company: String,
+  os: String,
   profileImage: {
     type: String,
     required: true,

@@ -44,7 +44,11 @@ router.post('/', function(req, res, next){
         prename: req.body.prename,
         roles: req.body.roles,
         description: req.body.description,
-        skills: req.body.skillselect
+        skills: req.body.skillselect,
+        company: req.body.company,
+        os: req.body.os,
+        socialnetworks: req.body.socialnetworks        
+
     }
 
     ProfileData.create(newProfile, function (err, profile){
@@ -145,7 +149,10 @@ router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, ne
         prename: req.body.prename,
         roles: req.body.roles,
         description: req.body.description,
-        skills: req.body.skillselect
+        skills: req.body.skillselect,
+        company: req.body.company,
+        os: req.body.os,
+        socialnetworks: req.body.socialnetworks 
     }
 
     ProfileData.create(newProfile, function (err, profile){
