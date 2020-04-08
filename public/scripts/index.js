@@ -126,7 +126,7 @@ http.onreadystatechange = function () {     //Call a function when the state cha
         document.getElementById("pname").value = data[0].prename
         document.getElementById("roles").value = data[0].roles
         document.getElementById("description").value = data[0].description
-        document.getElementById("user_id").value = data[0].user_id
+        document.getElementById("user_id").value = data[0].x_uid
     
     }
     fill();

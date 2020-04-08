@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 //Create Schema
 const ProfileDataSchema = new mongoose.Schema({
-  user_id: String,
+  x_uid: String,
   name: String,
   prename: String,
   roles: String,

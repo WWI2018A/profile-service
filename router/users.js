@@ -14,16 +14,16 @@ require('../config/cloudinaryConfig');
 // - else list all users
 router.get('/', function(req, res, next){
     
-    var headerExists = req.headers.uid;
+    var headerExists = req.headers.x-uid;
     
     if(headerExists) {
-    ProfileData.find({user_id: req.headers.uid}, function(err, profiles){
+    ProfileData.find({x_uid: req.headers.x-uid}, function(err, profiles){
         if (err) {
             res.send('No user data found');
             return next(err)
           } else {
             res.send(profiles);  
-            console.log('Data of user '+ req.headers.uid + ' (' + profiles[0].name +', ' + profiles[0].prename + ') ' + ' found and listed');
+            console.log('Data of user '+ req.headers.x-uid + ' (' + profiles[0].name +', ' + profiles[0].prename + ') ' + ' found and listed');
           } 
     });
     }
@@ -39,7 +39,7 @@ router.get('/', function(req, res, next){
 router.post('/', function(req, res, next){
 
     var newProfile = {
-        user_id: req.body.user_id,
+        x_uid: req.body.x-uid,
         name: req.body.name,
         prename: req.body.prename,
         roles: req.body.roles,
@@ -64,16 +64,16 @@ router.post('/', function(req, res, next){
 //Change existing user
 router.put('/', function(req, res, next){
     
-    var headerExists = req.headers.uid;
+    var headerExists = req.headers.x-uid;
     
     if(headerExists) {
-    ProfileData.findOneAndUpdate({user_id: req.headers.uid}, req.body, {new: true}, function(err, profiles){
+    ProfileData.findOneAndUpdate({x_uid: req.headers.x-uid}, req.body, {new: true}, function(err, profiles){
         if (err) {
             res.send('no user data found');
             return next(err)
           } else {
-            console.log('data of user '+ req.headers.uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
-            res.send('data of user '+ req.headers.uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
+            console.log('data of user '+ req.headers.x-uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
+            res.send('data of user '+ req.headers.x-uid + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
           }
     })
 }
@@ -85,14 +85,14 @@ else {
 })
 
 //Delete existing user
-router.delete('/:uid', function( req, res, next){
-    ProfileData.findOneAndDelete({user_id: req.params.uid}, function(err, profiles){
+router.delete('/:x-uid', function( req, res, next){
+    ProfileData.findOneAndDelete({x_uid: req.params.x-uid}, function(err, profiles){
         if (err) {
             res.send('no users found');
             return next(err)
           } else {
-            console.log('data of user '+ req.params.uid + ' was deleted');
-            res.send('data of user '+ req.params.uid + ' was deleted');
+            console.log('data of user '+ req.params.x-uid + ' was deleted');
+            res.send('data of user '+ req.params.x-uid + ' was deleted');
           }
         })
 })
@@ -144,7 +144,7 @@ router.post('/profilePicture/change', upload.single('fileUpload'), (req, res, ne
     console.log(result.secure_url);
     var newProfile = {
         profileImage: result.secure_url,
-        user_id: req.body.user_id,
+        x_uid: req.body.x-uid,
         name: req.body.name,
         prename: req.body.prename,
         roles: req.body.roles,
