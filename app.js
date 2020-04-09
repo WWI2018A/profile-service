@@ -44,8 +44,8 @@ app.set('view engine', 'html');
 const userRouter = require('./router/users');
 app.use('/profiles/', userRouter);
 
-app.listen(4000, function () {
-  console.log('Profile Service listening on port 4000!');
+app.listen(3000, function () {
+  console.log('Profile Service listening on port 3000!');
 });
 
 
