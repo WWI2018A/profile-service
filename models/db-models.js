@@ -23,5 +23,5 @@ const ProfileDataSchema = new mongoose.Schema({
 
 
 //Create model of Schema
-var ProfileData = mongoose.model('UserData', ProfileDataSchema);
+var ProfileData = mongoose.model('UserData', ProfileDataSchema, 'profile_service_profiles');
 module.exports = ProfileData;

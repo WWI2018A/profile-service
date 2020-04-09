@@ -21,7 +21,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 //Connect to specific Cluster
-mongoose.connect("mongodb+srv://dbUser:start123@todo-profilesvc-sprud.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
+mongoose.connect("mongodb://profile_service_user:wwi2018a@193.196.54.199:27017", { useNewUrlParser: true })
 .then(() => {
   console.log('Database connection successful')
 })
@@ -39,15 +39,13 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+
 
 const userRouter = require('./router/users');
-app.use('/api/v1/profiles/', userRouter);
+app.use('/profiles/', userRouter);
 
-app.listen(3000, function () {
-  console.log('Profile Service listening on port 3000!');
+app.listen(4000, function () {
+  console.log('Profile Service listening on port 4000!');
 });
 
 
