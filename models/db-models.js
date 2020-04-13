@@ -3,20 +3,34 @@ const mongoose = require('mongoose');
 
 //Create Schema
 const ProfileDataSchema = new mongoose.Schema({
-  x_uid: String,
+  uid: String,
   name: String,
   prename: String,
   roles: String,
-  skills: [String],
-  socialnetworks: [String],
   company: String,
-  os: String,
-  profileImage: {
+  description: String,
+  quote: String,
+  
+  skills: [],
+  skills_icons: [],
+  
+  os_icons: [],
+  os: [],
+
+  social: [],
+  social_icons: [],
+  
+  profilePicture: {
     type: String,
     required: true,
     default: 'https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1585643114/ProfileService/lbjytgmsbisjfjfmcya4.png'
   },
-  description: String
+  profileWallpaper: {
+    type: String,
+    requires: true,
+    default: 'https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1585643114/ProfileService/lbjytgmsbisjfjfmcya4.png'
+  },
+  
 }, {
   versionKey: false // No automatic version key will be generated
 });

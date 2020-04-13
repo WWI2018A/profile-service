@@ -5,6 +5,10 @@ const path = require('path');
 var morgan = require('morgan')
 app.use(morgan('tiny'));
 
+//Necessary for external access
+var cors = require('cors')
+app.use(cors())
+
 //Necessary for reading request bodies
 app.use(bodyParser.json({limit: '1000mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '1000mb', extended: true}))

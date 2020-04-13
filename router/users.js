@@ -16,14 +16,14 @@ router.get('/', function(req, res, next){
     
     var headerExists = req.header('x-uid');
     
-    if(headerExists) {
-    ProfileData.find({x_uid: req.header('x-uid')}, function(err, profiles){
+    if(headerExists !== undefined) {
+    ProfileData.find({uid: req.header('x-uid')}, function(err, profiles){
         if (err) {
             res.send('No user data found');
             return next(err)
           } else {
             res.send(profiles);  
-            console.log('Data of user '+ req.header('x-uid') + ' (' + profiles[0].name +', ' + profiles[0].prename + ') ' + ' found and listed');
+            console.log('Data of user '+ req.header('x-uid') + ' found and listed');
           } 
     });
     }
@@ -39,16 +39,22 @@ router.get('/', function(req, res, next){
 router.post('/', function(req, res, next){
 
     var newProfile = {
-        x_uid: req.body('x-uid'),
+        uid: req.body.uid,
+        quote: req.body.quote,
         name: req.body.name,
         prename: req.body.prename,
         roles: req.body.roles,
         description: req.body.description,
-        skills: req.body.skillselect,
+        skills: req.body.skills,
+        skills_icons: req.body.skills_icon,
         company: req.body.company,
         os: req.body.os,
-        socialnetworks: req.body.socialnetworks        
-
+        os_icons: req.body.os_icon,
+        social: req.body.social,
+        social_icons: req.body.social_icon,
+        quote: req.body.quote,
+        profilePicture: req.body.profilePicture,
+        profileWallpaper: req.body.profileWallpaper
     }
 
     ProfileData.create(newProfile, function (err, profile){
@@ -61,32 +67,10 @@ router.post('/', function(req, res, next){
     })
 })
 
-//Change existing user
-router.put('/', function(req, res, next){
-    
-    var headerExists = req.header('x-uid');
-    
-    if(headerExists) {
-    ProfileData.findOneAndUpdate({x_uid: req.header('x-uid')}, req.body, {new: true}, function(err, profiles){
-        if (err) {
-            res.send('no user data found');
-            return next(err)
-          } else {
-            console.log('data of user '+ req.header('x-uid') + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
-            res.send('data of user '+ req.header('x-uid') + ' (' + profiles.name +', ' + profiles.prename + ') ' + ' was changed');
-          }
-    })
-}
-else {
-    var err = new Error("Please specify a User-ID.");
-    res.send(err.message);
-    next();
-}
-})
 
 //Delete existing user
 router.delete('/', function( req, res, next){
-    ProfileData.findOneAndDelete({x_uid: req.header('x-uid')}, function(err, profiles){
+    ProfileData.findOneAndDelete({'x-uid': req.header('x-uid')}, function(err, profiles){
         if (err) {
             res.send('no users found');
             return next(err)
@@ -103,7 +87,10 @@ router.get('/testpage', (req, res, next) => {
 });
 
 
-router.post('/', upload.single('fileUpload'), (req, res, next) => {
+
+
+//POST Request for adding a new ProfilePicture.
+router.post('/imageupload/profilepicture', upload.single('file-input'), (req, res, next) => {
     
     // User did not input any Picture
     if(req.file === undefined) {
@@ -138,33 +125,53 @@ router.post('/', upload.single('fileUpload'), (req, res, next) => {
         transformation: [{width: 300, height: 300, crop: "fit"}]
     })
 
-    // This is the location of the uploaded Picture. You just have to add it to the user database now.
-    console.log(result.secure_url);
-    var newProfile = {
-        profileImage: result.secure_url,
-        x_uid: req.body('x-uid'),
-        name: req.body.name,
-        prename: req.body.prename,
-        roles: req.body.roles,
-        description: req.body.description,
-        skills: req.body.skillselect,
-        company: req.body.company,
-        os: req.body.os,
-        socialnetworks: req.body.socialnetworks 
+    // This is the location of the uploaded Picture.
+    res.send(result.secure_url)
+});
+
+
+//POST Request for adding a new Wallpaper.
+router.post('/imageupload/wallpaper', upload.single('file-input'), (req, res, next) => {
+    
+    // User did not input any Picture
+    if(req.file === undefined) {
+        var err = new Error("Please select a picture before commiting.");
+        res.send(err.message);
     }
 
-    ProfileData.create(newProfile, function (err, profile){
-        if (err) {
-            return next(err)
-          } else {
-            console.log('user data saved!');
-            console.log(newProfile);
-          }
+    else {
+        var fileTypeIsValid = checkFileType({req});
+    }
+
+    switch(fileTypeIsValid) {
+
+        // Valid file type, continue to users/profile/picture.
+        case true:
+            next();
+            break;
+
+        // Wrong format, display error.
+        case false:
+            var err = new Error("You may only select .jpeg, .jpg, or .png files.")
+            res.send(err);
+    }
+
+
+}, async (req, res, next) => {
+
+    const result = await cloudinary.v2.uploader.upload(req.file.path, {
+
+        secure: true,
+        folder: "ProfileService",
+        transformation: [{width: 1920, height: 1080, crop: "fit"}]
     })
-    var route = '/api/v1/profiles/'
-    // Redirect to the same page, put this time the new profile picture has to be loaded into the html!
-    res.redirect(route);
+
+    // This is the location of the uploaded Picture.
+    res.send(result.secure_url)
 });
+
+
+
 
 
 // --- Functions -----------------------------------------------------
@@ -187,6 +194,22 @@ function checkFileType({req}) {
 
     return false;
 }
+
+
+
+router.put('/', function(req, res, next){
+    
+    ProfileData.findOneAndUpdate({uid: req.body.uid}, req.body, {new: true}, function(err, profiles){
+        if (err) {
+            console.log('Put did not work');
+            return next(err)
+          } else {
+            console.log('data of user '+ req.body.uid + ' was changed');
+            res.json(201, "Success");
+          }
+    })
+})
+
 
 // Export
 module.exports = router;
