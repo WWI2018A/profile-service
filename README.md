@@ -2,13 +2,14 @@ Profile-Service
 ---
 **Description:**
 Description of the Profile-Service
-The Profile-Service contains the profile rerlated information.
+The Profile-Service contains the profile related information.
 
 **Requests:**
-* [GET /profiles/{id}](#get-profilesid)
+* [GET /profiles/](#get-profilesid)
 * [POST /profiles](#post-profiles)
-* [PUT /profiles/{id}](#put-profilesid)
-* [DELETE /profiles/{id}](#delete-profilesid)
+* [POST /profiles](#post-profiles)
+* [PUT /profiles/](#put-profilesid)
+* [DELETE /profiles/](#delete-profilesid)
 
 GET /profiles
 ----
