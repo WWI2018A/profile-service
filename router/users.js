@@ -46,13 +46,12 @@ router.post('/', function(req, res, next){
         roles: req.body.roles,
         description: req.body.description,
         skills: req.body.skills,
-        skills_icons: req.body.skills_icon,
+        skills_icons: req.body.skills_icons,
         company: req.body.company,
         os: req.body.os,
-        os_icons: req.body.os_icon,
+        os_icons: req.body.os_icons,
         social: req.body.social,
-        social_icons: req.body.social_icon,
-        quote: req.body.quote,
+        social_icons: req.body.social_icons,
         profilePicture: req.body.profilePicture,
         profileWallpaper: req.body.profileWallpaper
     }
@@ -70,7 +69,10 @@ router.post('/', function(req, res, next){
 
 //Delete existing user
 router.delete('/', function( req, res, next){
-    ProfileData.findOneAndDelete({'x-uid': req.header('x-uid')}, function(err, profiles){
+    var headerExists = req.header('x-uid');
+    
+    if(headerExists !== undefined) {
+    ProfileData.findOneAndDelete({uid: req.header('x-uid')}, function(err, profiles){
         if (err) {
             res.send('no users found');
             return next(err)
@@ -79,7 +81,11 @@ router.delete('/', function( req, res, next){
             res.send('data of user '+ req.header('x-uid') + ' was deleted');
           }
         })
+    } else {
+        res.send("Please specify a User-ID")
+    }
 })
+
 
 router.get('/testpage', (req, res, next) => {
 
@@ -94,7 +100,7 @@ router.post('/imageupload/profilepicture', upload.single('file-input'), (req, re
     
     // User did not input any Picture
     if(req.file === undefined) {
-        var err = new Error("Please select a picture before commiting.");
+        var err = new Error("Profile-Picture missing in Request.");
         res.send(err.message);
     }
 
@@ -135,7 +141,7 @@ router.post('/imageupload/wallpaper', upload.single('file-input'), (req, res, ne
     
     // User did not input any Picture
     if(req.file === undefined) {
-        var err = new Error("Please select a picture before commiting.");
+        var err = new Error("Wallpaper missing in Request");
         res.send(err.message);
     }
 
