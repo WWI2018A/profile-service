@@ -101,7 +101,7 @@ router.post('/imageupload/profilepicture', upload.single('file-input'), (req, re
     // User did not input any Picture
     if(req.file === undefined) {
         var err = new Error("Profile-Picture missing in Request.");
-        res.send(err.message);
+        res.json(400, err.message);
     }
 
     else {
@@ -118,7 +118,7 @@ router.post('/imageupload/profilepicture', upload.single('file-input'), (req, re
         // Wrong format, display error.
         case false:
             var err = new Error("You may only select .jpeg, .jpg, or .png files.")
-            res.send(err);
+            res.json(400, err);
     }
 
 
@@ -132,7 +132,7 @@ router.post('/imageupload/profilepicture', upload.single('file-input'), (req, re
     })
 
     // This is the location of the uploaded Picture.
-    res.send(result.secure_url)
+    res.json(201, result.secure_url);
 });
 
 
@@ -142,7 +142,7 @@ router.post('/imageupload/wallpaper', upload.single('file-input'), (req, res, ne
     // User did not input any Picture
     if(req.file === undefined) {
         var err = new Error("Wallpaper missing in Request");
-        res.send(err.message);
+        res.json(400, err.message);
     }
 
     else {
@@ -159,7 +159,7 @@ router.post('/imageupload/wallpaper', upload.single('file-input'), (req, res, ne
         // Wrong format, display error.
         case false:
             var err = new Error("You may only select .jpeg, .jpg, or .png files.")
-            res.send(err);
+            res.json(400, err);
     }
 
 
@@ -173,7 +173,7 @@ router.post('/imageupload/wallpaper', upload.single('file-input'), (req, res, ne
     })
 
     // This is the location of the uploaded Picture.
-    res.send(result.secure_url)
+    res.json(201, result.secure_url);
 });
 
 
@@ -211,7 +211,7 @@ router.put('/', function(req, res, next){
             return next(err)
           } else {
             console.log('data of user '+ req.body.uid + ' was changed');
-            res.json(201, "Success");
+            res.json(200, "Success");
           }
     })
 })

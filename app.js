@@ -24,8 +24,24 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
+
 //Connect to specific Cluster
-mongoose.connect("mongodb://profile_service_user:wwi2018a@193.196.54.199:27017", { useNewUrlParser: true })
+/*
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://193.196.54.199:27017/db_profile_service', {
+    useNewUrlParser: true,
+    user: 'profile_service_user',
+    pass: 'wwi2018a'
+}).then(() => {
+    console.log('successfully connected to the database');
+}).catch(err => {
+    console.log('error connecting to the database' + err);
+    process.exit();
+});
+*/
+
+mongoose.connect('mongodb://profile_service_user:wwi2018a@23c513c1-07ef-4fc4-88bf-956de810eecd.ma.bw-cloud-instance.org:27017/db_profile_service', {useNewUrlParser: true
+})
 .then(() => {
   console.log('Database connection successful')
 })
