@@ -1,8 +1,18 @@
-{
-    "_id":"5e6bb4452cb2927da4eaf11d",
-          "user_id":"45e6bb3352cb2sdf5a4eaf11d",
-          "name":"Name",
-          "prename":"Prename",
-          "roles":"Member",
-          "description":"I am a desription"
-}
+[{
+    "uid":"max.mustermann@gmail.com",
+    "name":"Max",
+    "prename":"Mustermann",
+    "roles":"Member",
+    "company":"Mustercompany",
+    "description":"I am a desription",
+    "quote":"I am a quote",
+
+    "skills":["angular","docker","java", "..."],
+     "skills_icons": ["fab fa-angular, fab fa-docker, fab fa-java"],
+    "os":["windows","linux", "..."],
+    "os_icons": ["fab fa-windows, fab fa-linux" ],
+    "social":["instagram","snapchat","facebook", "..."],
+    "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook" ],
+    "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+    "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg"
+}]
