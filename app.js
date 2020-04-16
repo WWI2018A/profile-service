@@ -40,7 +40,11 @@ mongoose.connect('mongodb://193.196.54.199:27017/db_profile_service', {
 });
 */
 
-mongoose.connect('mongodb://profile_service_user:wwi2018a@23c513c1-07ef-4fc4-88bf-956de810eecd.ma.bw-cloud-instance.org:27017/db_profile_service', {useNewUrlParser: true
+mongoose.connect('mongodb://profile_service_user:wwi2018a@193.196.54.199:27017/db_profile_service', {
+  useNewUrlParser: true,
+  keepAlive: true,
+  socketTimeoutMS: 3600000,
+  connectTimeoutMS: 3600000
 })
 .then(() => {
   console.log('Database connection successful')
