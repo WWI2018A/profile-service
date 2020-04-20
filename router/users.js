@@ -20,7 +20,8 @@ router.get('/', function(req, res, next){
     ProfileData.find({uid: req.header('x-uid')}, function(err, profiles){
         if (err) {
             res.send('No user data found');
-            return next(err)
+            throw err;
+            return next(err);
           } else {
             res.send(profiles);  
             console.log('Data of user '+ req.header('x-uid') + ' found and listed');
@@ -29,8 +30,14 @@ router.get('/', function(req, res, next){
     }
     else {
         ProfileData.find(function(err, profiles){
+            if(err){
+                res.send('Database is empty')
+                throw err;
+                return next(err);
+            }else {
             res.send(profiles);
             console.log('All profiles were listed'); 
+            }
     })
 }
 })
