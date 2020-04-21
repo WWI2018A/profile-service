@@ -32,6 +32,7 @@ const ProfileDataSchema = new mongoose.Schema({
   },
   
 }, {
+  timestamps: true,
   versionKey: false // No automatic version key will be generated
 });
 
