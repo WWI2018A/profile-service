@@ -2,8 +2,10 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
-var morgan = require('morgan')
-app.use(morgan('tiny'));
+
+//Morgan is used to diplay calles endpoints
+//var morgan = require('morgan')
+//app.use(morgan('tiny'));
 
 //Necessary for external access
 var cors = require('cors')

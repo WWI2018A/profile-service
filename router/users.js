@@ -19,11 +19,10 @@ router.get('/', function(req, res, next){
     if(headerExists !== undefined) {
     ProfileData.find({uid: req.header('x-uid')}, function(err, profiles){
         if (err) {
-            res.send('No user data found');
-            throw err;
+            res.json(404, "No matching Profile found");
             return next(err);
           } else {
-            res.send(profiles);  
+            res.json(200, profiles);  
             console.log('Data of user '+ req.header('x-uid') + ' found and listed');
           } 
     });
@@ -31,11 +30,10 @@ router.get('/', function(req, res, next){
     else {
         ProfileData.find(function(err, profiles){
             if(err){
-                res.send('Database is empty')
-                throw err;
+                res.json(404, 'Database is empty')
                 return next(err);
             }else {
-            res.send(profiles);
+            res.json(200, profiles);
             console.log('All profiles were listed'); 
             }
     })
@@ -46,7 +44,7 @@ router.get('/', function(req, res, next){
 router.post('/', function(req, res, next){
 
     var newProfile = {
-        uid: req.body.uid,
+        uid: req.header('x-uid'),
         quote: req.body.quote,
         name: req.body.name,
         prename: req.body.prename,
