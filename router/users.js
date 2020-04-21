@@ -19,11 +19,15 @@ router.get('/', function(req, res, next){
     if(headerExists !== undefined) {
     ProfileData.find({uid: req.header('x-uid')}, function(err, profiles){
         if (err) {
-            res.json(404, "No matching Profile found");
+            res.json(500, "Internal Error");
             return next(err);
           } else {
-            res.json(200, profiles);  
-            console.log('Data of user '+ req.header('x-uid') + ' found and listed');
+              if(profiles.length > 0){
+                res.json(200, profiles);  
+                console.log('Data of user '+ req.header('x-uid') + ' found and listed');
+              }else {
+                res.json(404, "No matching Profile found");
+              }
           } 
     });
     }
