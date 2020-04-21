@@ -135,7 +135,7 @@ router.put('/', function (req, res, next) {
                     })
 
                 } else {
-                    res.status(400).json("ERROR at PUT: Profile of User " + re.header('x-uid') + " not found");
+                    res.status(400).json("ERROR at PUT: Profile of User " + req.header('x-uid') + " not found");
                 }
             }
         })
