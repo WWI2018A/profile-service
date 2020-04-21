@@ -2,8 +2,10 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 const path = require('path');
-var morgan = require('morgan')
-app.use(morgan('tiny'));
+
+//Morgan is used to diplay calles endpoints
+//var morgan = require('morgan')
+//app.use(morgan('tiny'));
 
 //Necessary for external access
 var cors = require('cors')
@@ -40,7 +42,11 @@ mongoose.connect('mongodb://193.196.54.199:27017/db_profile_service', {
 });
 */
 
-mongoose.connect('mongodb://profile_service_user:wwi2018a@23c513c1-07ef-4fc4-88bf-956de810eecd.ma.bw-cloud-instance.org:27017/db_profile_service', {useNewUrlParser: true
+mongoose.connect('mongodb://profile_service_user:wwi2018a@193.196.53.122:27017/db_profile_service', {
+  useNewUrlParser: true,
+  keepAlive: true,
+  socketTimeoutMS: 3600000,
+  connectTimeoutMS: 3600000
 })
 .then(() => {
   console.log('Database connection successful')
