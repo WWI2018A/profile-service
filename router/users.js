@@ -14,7 +14,6 @@ require('../config/cloudinaryConfig');
 // - else list all users
 router.get('/', function(req, res, next){
     console.log(req.header)
-    console.log(req.body)
     console.log("GET Request erhalten")
 
     var headerExists = req.header('x-uid');
