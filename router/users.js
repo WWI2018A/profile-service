@@ -6,6 +6,8 @@ const upload = require('../config/multerConfig');
 const cloudinary = require('cloudinary')
 require('../config/cloudinaryConfig');
 
+var cors = require('cors');
+app.use(cors());
 // -------------------------------------------
 
 //GET User:
