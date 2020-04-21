@@ -35,23 +35,15 @@ Returns all profiles.
 
    **Optional:**
  
-      `none`
+     `none`
 
  *  **Header Params:**
 
-    `none`
-
-   **Required:**
- 
-   `none`
-
-   **Optional:**
- 
-   `none`
+     `none`
 
 * **Data Params:**
 
-      `none`
+     `none`
 
 * **Success Response:**
   
@@ -268,13 +260,7 @@ POST /profiles/
       `none`
 
   *  **Header Params:**
-   
-      **Required:**
- 
-      `none`
 
-      **Optional:**
- 
       `none`
    
    * **Data Params:**
@@ -305,8 +291,8 @@ POST /profiles/
      * **Code:** 201 CREATED <br />
        **Content:**
 
-        ```json
-      { 
+       ```json
+       { 
        "uid":"max.mustermann@gmail.com",
        "name":"Max",
        "prename":"Mustermann",
@@ -323,8 +309,7 @@ POST /profiles/
        "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook", ],
        "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
        "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
-
-      }
+       }
        ```
    
     
@@ -354,7 +339,7 @@ POST /profiles/picture
      
    * **URL:**
    
-    /profiles/imageupload/profilepicture
+     /profiles/imageupload/profilepicture
    
    * **Method:**
    
@@ -373,13 +358,7 @@ POST /profiles/picture
       `none`
 
   *  **Header Params:**
-       
-      **Required:**
- 
-      `none`
 
-      **Optional:**
- 
       `none`
    
    * **Data Params:**
@@ -421,9 +400,7 @@ POST /profiles/picture
        {
          "error" : "An error occurred." 
        }
-       ```
-   
-     OR      
+       ```      
    
    * **Sample JSON mock files:**
    
@@ -457,14 +434,8 @@ POST /profiles/wallpaper
       `none`
 
   *  **Header Params:**
-       
-      **Required:**
- 
-      `none`
 
-      **Optional:**
- 
-      `none`
+       `none`
    
    * **Data Params:**
      
@@ -516,7 +487,8 @@ POST /profiles/wallpaper
 
 PUT /profiles/id
 ----
-    Updates profile data with the given profile id via header.
+
+   Updates profile data with the given profile id via header.
      
    * **URL:**
    
@@ -631,15 +603,15 @@ DELETE /profiles/id
   
 *  **URL Params:**
 
-  `none`
+     `none`
 
    **Required:**
  
-   `none`
+     `none`
 
    **Optional:**
  
-   `none`
+     `none`
 
 *  **Header Params:**
 
