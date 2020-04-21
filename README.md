@@ -6,24 +6,27 @@ The Profile-Service contains the profile related information.
 
 **Requests:**
 * [GET /profiles/](#get-profiles)
-* [GET /profiles/](#get-profilesid)
+* [GET /profiles/id](#get-profilesid)
 * [POST /profiles](#post-profiles)
-* [POST /profiles](#post-profilespicture)
-* [POST /profiles](#post-profileswallpaper)
-* [PUT /profiles/](#put-profilesid)
-* [DELETE /profiles/](#delete-profilesid)
+* [POST /profiles/picture](#post-profilespicture)
+* [POST /profiles/wallpaper](#post-profileswallpaper)
+* [PUT /profiles/id](#put-profilesid)
+* [DELETE /profiles/id](#delete-profilesid)
 
 GET /profiles
 ----
 Returns all profiles.
 
 * **URL:**
-api/v1/profiles/
+
+  /profiles/
 
 * **Method:**
 
   `GET`
-  *  **URL Params:**
+
+* **URL Params:**
+
      `none`
 
    **Required:**
@@ -34,7 +37,8 @@ api/v1/profiles/
  
       `none`
 
-  *  **Header Params:**
+ *  **Header Params:**
+
     `none`
 
    **Required:**
@@ -125,16 +129,6 @@ api/v1/profiles/
       "error" : "Could not find the profiles" 
     }
     ```
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
-    ```json
-    {
-      "error" : "Unauthorized."
-    }
-    ```
     
   OR
     
@@ -161,13 +155,14 @@ GET /profiles/id
   
 * **URL:**
 
-  api/v1/profiles/
+  /profiles/
 
 * **Method:**
 
   `GET`
 
 *  **URL Params:**
+
      `none`
 
    **Required:**
@@ -179,11 +174,10 @@ GET /profiles/id
       `none`
   
 *  **Header Params:**
-    `x-uid`
 
    **Required:**
  
-   `x-uid=[string]`
+   `x-uid:[string]`
 
    **Optional:**
  
@@ -229,17 +223,7 @@ GET /profiles/id
       "error" : "Could not find the profile with the id: [id]" 
     }
     ```
-
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
-    ```json
-    {
-      "error" : "Unauthorized."
-    }
-    ```
-    
+   
   OR
     
   * **Code:** 500 INTERNAL SERVER ERROR <br />
@@ -265,7 +249,7 @@ POST /profiles/
      
    * **URL:**
    
-     api/v1/profiles/
+     /profiles/
    
    * **Method:**
    
@@ -284,15 +268,14 @@ POST /profiles/
       `none`
 
   *  **Header Params:**
-    `none`
-
-   **Required:**
+   
+      **Required:**
  
-   `none`
+      `none`
 
-   **Optional:**
+      **Optional:**
  
-   `none`
+      `none`
    
    * **Data Params:**
    
@@ -314,34 +297,33 @@ POST /profiles/
       "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook"],
       "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
       "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg"
-      
-    }
+       }
        ```
    
    * **Success Response:**
      
      * **Code:** 201 CREATED <br />
-       **Content:** 
+       **Content:**
+
         ```json
       { 
-      "uid":"max.mustermann@gmail.com",
-      "name":"Max",
-      "prename":"Mustermann",
-      "roles":"Member",
-      "company":"Mustercompany",
-      "description":"I am a desription",
-      "quote":"I am a quote",
+       "uid":"max.mustermann@gmail.com",
+       "name":"Max",
+       "prename":"Mustermann",
+       "roles":"Member",
+       "company":"Mustercompany",
+       "description":"I am a desription",
+       "quote":"I am a quote",
 
-      "skills":["angular","docker","java", "..."],
+       "skills":["angular","docker","java", "..."],
        "skills_icons": ["fab fa-angular, fab fa-docker, fab fa-java", ],
-      "os":["windows","linux", "..."],
-      "os_icons": ["fab fa-windows, fab fa-linux," ],
-      "social":["instagram","snapchat","facebook", "..."],
-      "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook", ],
-      "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
-      "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
-      
-    }   
+       "os":["windows","linux", "..."],
+       "os_icons": ["fab fa-windows, fab fa-linux," ],
+       "social":["instagram","snapchat","facebook", "..."],
+       "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook", ],
+       "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+       "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+
       }
        ```
    
@@ -354,18 +336,7 @@ POST /profiles/
        {
          "error" : "An error occurred." 
        }
-       ```
-   
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
+       ```      
    
    * **Sample JSON mock files:**
    
@@ -383,7 +354,7 @@ POST /profiles/picture
      
    * **URL:**
    
-     api/v1/profiles/imageupload/profilepicture
+    /profiles/imageupload/profilepicture
    
    * **Method:**
    
@@ -403,8 +374,6 @@ POST /profiles/picture
 
   *  **Header Params:**
        
-       `none`
-
       **Required:**
  
       `none`
@@ -436,10 +405,12 @@ POST /profiles/picture
      * **Code:** 201 CREATED <br />
        **Content:** 
         ```json
-      { 
-        "data": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586931406/ProfileService/nx9tic2pwcoj1sud0z3b.jpg", "status": 201, "statusText": "Created" 
-      }
-       ```
+        {  
+        "data": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586931406/ProfileService/nx9tic2pwcoj1sud0z3b.jpg", 
+        "status": 201, 
+        "statusText": "Created" 
+        }
+        ```
    
     
    * **Error Response:**
@@ -452,16 +423,7 @@ POST /profiles/picture
        }
        ```
    
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
+     OR      
    
    * **Sample JSON mock files:**
    
@@ -476,7 +438,7 @@ POST /profiles/wallpaper
      
    * **URL:**
    
-     api/v1/profiles/imageupload/wallpaper
+     /profiles/imageupload/wallpaper
    
    * **Method:**
    
@@ -496,8 +458,6 @@ POST /profiles/wallpaper
 
   *  **Header Params:**
        
-       `none`
-
       **Required:**
  
       `none`
@@ -529,9 +489,10 @@ POST /profiles/wallpaper
      * **Code:** 201 CREATED <br />
        **Content:** 
         ```json
-      { 
+
+        { 
         "data": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586931406/ProfileService/nx9tic2pwcoj1sud0z3b.jpg", "status": 201, "statusText": "Created" 
-      }
+        }
        ```
    
     
@@ -545,17 +506,6 @@ POST /profiles/wallpaper
        }
        ```
    
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
-   
    * **Sample JSON mock files:**
    
    
@@ -566,11 +516,11 @@ POST /profiles/wallpaper
 
 PUT /profiles/id
 ----
-     Updates profile data with the given profile id via header.
+    Updates profile data with the given profile id via header.
      
    * **URL:**
    
-     api/v1/profiles/{id}
+     /profiles/
    
    * **Method:**
    
@@ -590,13 +540,11 @@ PUT /profiles/id
 
    *  **Header Params:**
 
-       `x-uid`
-
-    **Required:**
+      **Required:**
   
        `x-id=[string]`
 
-    **Optional:**
+      **Optional:**
   
        `none`
    
@@ -655,18 +603,7 @@ PUT /profiles/id
        {
          "error" : "An error occurred." 
        }
-       ```
-   
-     OR
-   
-     * **Code:** 401 UNAUTHORIZED <br />
-       **Content:** ``
-       ```json
-       {
-         "error" : "Unauthorized."
-       }
-       ```
-       
+       ```      
    
    * **Sample JSON mock files:**
    
@@ -686,13 +623,14 @@ DELETE /profiles/id
   
 * **URL:**
 
-  api/v1/profiles/
+  /profiles/
 
 * **Method:**
 
   `DELETE`
   
 *  **URL Params:**
+
   `none`
 
    **Required:**
@@ -702,17 +640,16 @@ DELETE /profiles/id
    **Optional:**
  
    `none`
-   *  **Header Params:**
 
-       `x-uid`
+*  **Header Params:**
 
     **Required:**
   
-       `x-id=[string]`
+    `x-id:[string]`
 
     **Optional:**
   
-       `none`
+    `none`
 
 * **Data Params:**
 
@@ -734,17 +671,7 @@ DELETE /profiles/id
     ```
 
   OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** ``
-    ```json
-    {
-      "error" : "Unauthorized."
-    }
-    ```
-   
-  OR
-   
+  
   * **Code:** 404 NOT FOUND <br />
     **Content:** ``
     ```json
