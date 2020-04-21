@@ -10,11 +10,6 @@ const path = require('path');
 //Necessary for external access
 //var cors = require('cors')
 //app.use(cors())
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 //Necessary for reading request bodies
 app.use(bodyParser.json({limit: '1000mb', extended: true}))
