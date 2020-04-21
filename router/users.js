@@ -183,7 +183,7 @@ router.delete('/', function (req, res, next) {
     } else {
         res.status(404).json("ERROR at DELETE Request: Please specify a User-ID")
     }
-}
+})
 
 
 
