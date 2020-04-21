@@ -116,20 +116,27 @@ router.put('/', function (req, res, next) {
 
     var headerExists = req.header('x-uid');
     if (headerExists !== undefined) {
-
-        ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { new: true }, function (err, profiles) {
+        ProfileData.find({ uid: req.header('x-uid') }, function (err, profiles) { //Check if requested User is already listed in Database
             if (err) {
-                console.log('Put did not work');
-                res.status(500).json("ERROR at PUT Request: Operation not successfull");
-                return next(err)
+                res.status(500).json("ERROR at PUT Request: Finding Profile failed")
+                throw err;
+                return next(err);
             } else {
-                if(profiles.length > 0) {
-                    console.log('data of user ' + req.header('x-uid') + ' was changed');
-                    res.status(200).json('data of user ' + req.header('x-uid') + ' was changed');
-                } else {
-                    res.status(400).json('ERROR at PUT Request: Profile of user ' + req.header('x-uid') + ' not found');
-                }
+                if (profiles.length > 0) {
+                    ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { new: true }, function (err, profiles) {
+                        if (err) {
+                            console.log('Put did not work');
+                            res.status(500).json("ERROR at PUT Request: Operation not successfull");
+                            return next(err)
+                        } else {
+                            console.log('data of user ' + req.header('x-uid') + ' was changed');
+                            res.status(200).json('data of user ' + req.header('x-uid') + ' was changed');
+                        }
+                    })
 
+                } else {
+                    res.status(400).json("ERROR at PUT: Profile of User " + re.header('x-uid') + " not found");
+                }
             }
         })
     } else {
@@ -150,25 +157,33 @@ router.delete('/', function (req, res, next) {
     var headerExists = req.header('x-uid');
     if (headerExists !== undefined) {
 
-        ProfileData.findOneAndDelete({ uid: req.header('x-uid') }, function (err, profiles) {
+        ProfileData.find({ uid: req.header('x-uid') }, function (err, profiles) { //Check if requested User is already listed in Database
             if (err) {
-                res.status(404).json("ERROR at DELETE Request: Finding Profile failed");
-                return next(err)
+                res.status(500).json("ERROR at DELETE Request: Finding Profile failed")
+                throw err;
+                return next(err);
             } else {
                 if (profiles.length > 0) {
-                    console.log('data of user ' + req.header('x-uid') + ' was deleted');
-                    res.status(200).json('data of user ' + req.header('x-uid') + ' was deleted')
-                }
-                else {
-                    res.status(404).json("ERROR at DELETE Request: Profile " + req.header('x-uid') + " doesn't exist")
+                    ProfileData.findOneAndDelete({ uid: req.header('x-uid') }, function (err, profiles) {
+                        if (err) {
+                            res.status(404).json("ERROR at DELETE Request: Finding Profile failed");
+                            return next(err)
+                        } else {
+                            console.log('data of user ' + req.header('x-uid') + ' was deleted');
+                            res.status(200).json('data of user ' + req.header('x-uid') + ' was deleted')
+                        }
+                    })
+                } else {
+                    res.status(404).json("ERROR at DELETE Request: Profile " + req.header('x-uid') + " not found")
                 }
 
             }
+
         })
     } else {
-        res.status(400).json("ERROR at DELETE Request: Please specify a User-ID");
+        res.status(404).json("ERROR at DELETE Request: Please specify a User-ID")
     }
-})
+}
 
 
 
