@@ -13,13 +13,17 @@ require('../config/cloudinaryConfig');
 // - if yes find and list user by user-id
 // - else list all users
 router.get('/', function(req, res, next){
-    
+    console.log(req.header)
+    console.log(req.body)
+    console.log("GET Request erhalten")
+
     var headerExists = req.header('x-uid');
     
     if(headerExists !== undefined) {
     ProfileData.find({uid: req.header('x-uid')}, function(err, profiles){
         if (err) {
             res.json(500, "Internal Error");
+            throw err;
             return next(err);
           } else {
               if(profiles.length > 0){
@@ -35,6 +39,7 @@ router.get('/', function(req, res, next){
         ProfileData.find(function(err, profiles){
             if(err){
                 res.json(404, 'Database is empty')
+                throw err;
                 return next(err);
             }else {
             res.json(200, profiles);
