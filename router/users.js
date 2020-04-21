@@ -123,8 +123,8 @@ router.put('/', function (req, res, next) {
                 res.status(500).json("ERROR at PUT Request: Operation not successfull");
                 return next(err)
             } else {
-                if (profiles.length > 0) {
-                    console.log('data of user ' + req.body.uid + ' was changed');
+                if(profiles.length > 0) {
+                    console.log('data of user ' + req.header('x-uid') + ' was changed');
                     res.status(200).json('data of user ' + req.header('x-uid') + ' was changed');
                 } else {
                     res.status(400).json('ERROR at PUT Request: Profile of user ' + req.header('x-uid') + ' not found');
