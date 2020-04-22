@@ -5,9 +5,6 @@ const ProfileData = require('../models/db-models');
 const upload = require('../config/multerConfig');
 const cloudinary = require('cloudinary')
 require('../config/cloudinaryConfig');
-var cors = require('cors')
-app.use(cors())
-app.options('*', cors()) // include before other routes
 
 
 
