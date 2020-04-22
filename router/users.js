@@ -5,6 +5,9 @@ const ProfileData = require('../models/db-models');
 const upload = require('../config/multerConfig');
 const cloudinary = require('cloudinary')
 require('../config/cloudinaryConfig');
+var cors = require('cors')
+app.use(cors())
+app.options('*', cors()) // include before other routes
 
 
 
@@ -135,7 +138,7 @@ router.put('/', function (req, res, next) {
                     })
 
                 } else {
-                    res.status(400).json("ERROR at PUT: Profile of User " + req.header('x-uid') + " not found");
+                    res.status(404).json("ERROR at PUT: Profile of User " + req.header('x-uid') + " not found");
                 }
             }
         })
@@ -166,7 +169,7 @@ router.delete('/', function (req, res, next) {
                 if (profiles.length > 0) {
                     ProfileData.findOneAndDelete({ uid: req.header('x-uid') }, function (err, profiles) {
                         if (err) {
-                            res.status(404).json("ERROR at DELETE Request: Finding Profile failed");
+                            res.status(500).json("ERROR at DELETE Request: Operation failed");
                             return next(err)
                         } else {
                             console.log('data of user ' + req.header('x-uid') + ' was deleted');
@@ -181,7 +184,7 @@ router.delete('/', function (req, res, next) {
 
         })
     } else {
-        res.status(404).json("ERROR at DELETE Request: Please specify a User-ID")
+        res.status(400).json("ERROR at DELETE Request: Please specify a User-ID")
     }
 })
 

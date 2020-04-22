@@ -10,6 +10,7 @@ const path = require('path');
 //Necessary for external access
 var cors = require('cors')
 app.use(cors())
+app.options('*', cors()) // include before other routes
 
 //Necessary for reading request bodies
 app.use(bodyParser.json({limit: '1000mb', extended: true}))
