@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
     else {
         ProfileData.find(function (err, profiles) {
             if (err) {
-                res.status(404).json("ERROR at GET Request: Listing all Profiles failed")
+                res.status(500).json("ERROR at GET Request: Listing all Profiles failed")
                 throw err;
                 return next(err);
             } else {
