@@ -116,13 +116,13 @@ router.put('/', function (req, res, next) {
 
     var headerExists = req.header('x-uid');
     if (headerExists !== undefined) {
-        ProfileData.find({ uid: req.header('x-uid') }, function (err, profiles) { //Check if requested User is already listed in Database
+        /*ProfileData.find({ uid: req.header('x-uid') }, function (err, profiles) { //Check if requested User is already listed in Database
             if (err) {
                 res.status(500).json("ERROR at PUT Request: Finding Profile failed")
                 throw err;
                 return next(err);
             } else {
-                if (profiles.length > 0) {
+                if (profiles.length > 0) {*/
                     ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { upsert: true }, function (err, profiles) {
                         if (err) {
                             console.log('Put did not work');
@@ -133,12 +133,12 @@ router.put('/', function (req, res, next) {
                             res.status(200).json('data of user ' + req.header('x-uid') + ' was changed');
                         }
                     })
-
+                    /*
                 } else {
                     res.status(404).json("ERROR at PUT: Profile of User " + req.header('x-uid') + " not found");
                 }
             }
-        })
+        })*/
     } else {
         res.status(400).json("ERROR at PUT Request: Please specify a User ID")
     }
