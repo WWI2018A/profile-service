@@ -123,7 +123,7 @@ router.put('/', function (req, res, next) {
                 return next(err);
             } else {
                 if (profiles.length > 0) {
-                    ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { new: true }, function (err, profiles) {
+                    ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { upsert: true }, function (err, profiles) {
                         if (err) {
                             console.log('Put did not work');
                             res.status(500).json("ERROR at PUT Request: Operation not successfull");
