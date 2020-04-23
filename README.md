@@ -256,7 +256,13 @@ POST /profiles/
 
   *  **Header Params:**
 
-      `none`
+      **Required:**
+  
+       `x-id=[string]`
+
+      **Optional:**
+  
+       `none`
    
    * **Data Params:**
    
@@ -468,15 +474,9 @@ POST /profiles/wallpaper
     
       `none`
 
-    *  **Header Params:**
+  *  **Header Params:**
 
-       **Required:**
-  
-        `x-id:[string]`
-
-      **Optional:**
-  
-        `none`
+       `none`
    
    * **Data Params:**
      
