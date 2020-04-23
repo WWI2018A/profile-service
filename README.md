@@ -67,6 +67,7 @@ Returns all profiles.
       "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook"],
       "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
       "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+      "updatedAt": "2020-04-22T21:25:37.151Z"
       
     }
     {
@@ -86,6 +87,7 @@ Returns all profiles.
       "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook"],
       "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784681/ProfileService/rb7f6frrbtbptgib3iv8.jpg",
       "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+      "updatedAt": "2020-04-22T21:25:37.151Z"
       }
 
       {
@@ -104,7 +106,8 @@ Returns all profiles.
       "social":["instagram","snapchat","facebook", "..."],
       "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook" ],
       "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784681/ProfileService/rb7f6frrbtbptgib3iv8.jpg",
-      "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg"
+      "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+      "updatedAt": "2020-04-22T21:25:37.151Z"
       }
       
       {"..."}
@@ -190,7 +193,8 @@ GET /profiles/id
       "social":["instagram","snapchat","facebook", "..."],
       "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook"],
       "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
-      "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg"
+      "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+      "updatedAt": "2020-04-22T21:25:37.151Z"
       
     }
     ```
@@ -300,6 +304,7 @@ POST /profiles/
        "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook", ],
        "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
        "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+       "createdAt": "2020-04-22T21:25:37.151Z"
        }
        ```
    
@@ -492,7 +497,9 @@ POST /profiles/wallpaper
         ```json
 
         { 
-        "data": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586931406/ProfileService/nx9tic2pwcoj1sud0z3b.jpg", "status": 201, "statusText": "Created" 
+        "data": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586931406/ProfileService/nx9tic2pwcoj1sud0z3b.jpg", 
+        "status": 201, 
+        "statusText": "Created" 
         }
        ```
    
@@ -603,7 +610,8 @@ PUT /profiles/id
            "social":["instagram","snapchat","facebook", "..."],
            "social_icons": ["fab fa-instagram, fab snapchat, fab fa-facebook" ],
            "profilePicture": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
-           "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg"
+           "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg",
+           "updatedAt": "2020-04-22T21:25:37.151Z"
        }
        ```
 
@@ -615,27 +623,7 @@ PUT /profiles/id
        {
          "error" : "ERROR at PUT Request: Please specify a User ID." 
        }
-       ```    
-
-   OR
-   
-   * **Code:** 404 NOT FOUND <br />
-       **Content:** 
-       ```json
-       {
-         "error" : ""ERROR at PUT: Profile of User [x-uid] not found." 
-       }
-       ```     
-
-   OR 
-   
-   * **Code:** 500 INTERNAL SERVER ERROR <br />
-       **Content:** 
-       ```json
-       {
-         "error" : "ERROR at PUT Request: Finding Profile failed." 
-       }
-       ```     
+       ```            
 
    OR
    
