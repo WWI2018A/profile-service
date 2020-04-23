@@ -6,12 +6,12 @@ The Profile-Service contains the profile related information.
 
 **Requests:**
 * [GET /profiles/](#get-profiles)
-* [GET /profiles/id](#get-profilesid)
+* [GET /profiles/](#get-profilesid)
 * [POST /profiles](#post-profiles)
-* [POST /profiles/picture](#post-profilespicture)
-* [POST /profiles/wallpaper](#post-profileswallpaper)
-* [PUT /profiles/id](#put-profilesid)
-* [DELETE /profiles/id](#delete-profilesid)
+* [POST /profiles//imageupload/profilepicture](#post-profilespicture)
+* [POST /profiles/imageupload/wallpaper](#post-profileswallpaper)
+* [PUT /profiles/](#put-profilesid)
+* [DELETE /profiles/](#delete-profilesid)
 
 GET /profiles
 ----
@@ -134,9 +134,9 @@ Returns all profiles.
 ***
 
 
-GET /profiles/id
+GET /profiles/
 ----
-  Returns the profile with the given profile-id.
+  Method included in Endpoint mentioned above, but seperated due to structural and logical differences. This Request contains a Header and returns the profile with the given x-uid.
   
 * **URL:**
 
@@ -363,7 +363,7 @@ POST /profiles/
    
    ***
    
-POST /profiles/picture
+POST /profiles/imageupload/profilepicture
 ----
    
    Adds profile picture to the profile.
@@ -449,7 +449,7 @@ POST /profiles/picture
    * **Notes:**
    
    *** 
-POST /profiles/wallpaper
+POST /profiles/imageupload/wallpaper
 ----
    
    Adds a wallpaper to the profile.
@@ -538,7 +538,7 @@ POST /profiles/wallpaper
    ***    
 
 
-PUT /profiles/id
+PUT /profiles/
 ----
 
    Updates profile data with the given profile id via header.
@@ -653,9 +653,9 @@ PUT /profiles/id
    
 
 
-DELETE /profiles/id
+DELETE /profiles/
   ----
-  Deletes a profile with the given profile-id.
+  Deletes a profile with the given x-uid.
   
 * **URL:**
 
