@@ -17,7 +17,7 @@ require('../config/cloudinaryConfig');
 // - if no: response to client: 404, nothing found
 // - if yes: list the found profile
 router.get('/', function (req, res, next) {
-    console.log("GET Request erhalten")
+    
 
     var headerExists = req.header('x-uid');
 
