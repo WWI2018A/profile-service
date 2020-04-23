@@ -118,7 +118,7 @@ Returns all profiles.
     **Content:** 
     ```json
     {
-      "error" : "Could not find the profiles" 
+      "error" : "No matching profile found." 
     }
     ```
     
@@ -128,7 +128,16 @@ Returns all profiles.
     **Content:** 
     ```json
     {
-      "error" : "An error occurred." 
+      "error" : "ERROR at GET Request: Finding Profile failed." 
+    }
+    ```
+OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** 
+    ```json
+    {
+      "error" : "ERROR at GET Request: Listing all Profiles failed." 
     }
     ```
 
@@ -206,23 +215,25 @@ GET /profiles/id
     ```
 
  
-* **Error Response:**
+ * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
+   * **Code:** 404 NOT FOUND <br />
     **Content:** 
     ```json
     {
-      "error" : "Could not find the profile with the id: [id]" 
+      "error":  "ERROR at GET Request: No matching Profile found." 
     }
     ```
    
   OR
-    
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** 
+
+ * **Error Response:**
+  
+   * **Code:** 500 INTERNAL SERVER ERROR <br />
+     **Content:** 
     ```json
     {
-      "error" : "An error occurred." 
+      "error" : "ERROR at GET Request: Finding Profile failed." 
     }
     ```
 
@@ -312,16 +323,51 @@ POST /profiles/
        }
        ```
    
-    
-   * **Error Response:**
+ * **Error Response:**
+   
+   * **Code:** 400 BAD REQUEST ERROR <br />
+     **Content:** 
+       ```json
+       {
+         "error" : "ERROR at POST: Profile already existing" 
+       }
+       ``` 
+
+  OR
+
+ * **Error Response:**
+   
+   * **Code:** 400 BAD REQUEST ERROR <br />
+     **Content:** 
+       ```json
+       {
+         "error" : "ERROR at POST Request: Please specify a User ID" 
+       }
+       ``` 
+
+   OR
+
+ * **Error Response:**
+   
+   * **Code:** 500 INTERNAL SERVER ERROR <br />
+     **Content:** 
+       ```json
+       {
+         "error" : "ERROR at POST Request: Creating new User failed" 
+       }
+       ``` 
+
+   OR
+
+ * **Error Response:**
    
      * **Code:** 500 INTERNAL SERVER ERROR <br />
        **Content:** 
        ```json
        {
-         "error" : "An error occurred." 
+         "error" : "ERROR at POST Request: Finding Profile failed" 
        }
-       ```      
+       ```         
    
    * **Sample JSON mock files:**
    
@@ -392,15 +438,27 @@ POST /profiles/picture
         ```
    
     
-   * **Error Response:**
+ * **Error Response:**
    
-     * **Code:** 500 INTERNAL SERVER ERROR <br />
-       **Content:** 
+   * **Code:** 400 BAD REQUEST <br />
+     **Content:** 
        ```json
        {
-         "error" : "An error occurred." 
+         "error" : "ERROR at Post Request: Profile-Picture missing in Request" 
        }
-       ```      
+       ```   
+
+   OR
+
+ * **Error Response:**
+   
+   * **Code:** 400 BAD REQUEST <br />
+     **Content:** 
+       ```json
+       {
+         "error" : "ERROR at Post Request: You may only select .jpeg, .jpg, or .png files." 
+       }
+       ```     
    
    * **Sample JSON mock files:**
    
@@ -467,13 +525,25 @@ POST /profiles/wallpaper
        ```
    
     
-   * **Error Response:**
+ * **Error Response:**
    
-     * **Code:** 500 INTERNAL SERVER ERROR <br />
+     * **Code:** 400 BAD REQUEST <br />
        **Content:** 
        ```json
        {
-         "error" : "An error occurred." 
+         "error" : "ERROR at Post Request: Wallpaper missing in Request." 
+       }
+       ```
+
+   OR
+
+ * **Error Response:**
+   
+   * **Code:** 400 BAD REQUEST <br />
+       **Content:** 
+       ```json
+       {
+         "error" : "ERROR at Post Request: You may only select .jpeg, .jpg, or .png files." 
        }
        ```
    
@@ -542,7 +612,7 @@ PUT /profiles/id
        }
        ```
    
-   * **Success Response:**
+ * **Success Response:**
      
      * **Code:** 200 OK Data has been changed <br />
        **Content:** 
@@ -566,16 +636,52 @@ PUT /profiles/id
            "profileWallpaper": "https://res.cloudinary.com/thewebsitemediacloud/image/upload/v1586784688/ProfileService/p2uinteywoq7ei2ug8zy.jpg"
        }
        ```
-    
-   * **Error Response:**
+
+ * **Error Response:**
    
-     * **Code:** 500 INTERNAL SERVER ERROR <br />
+     * **Code:** 400 BAD REQUEST <br />
        **Content:** 
        ```json
        {
-         "error" : "An error occurred." 
+         "error" : "ERROR at PUT Request: Please specify a User ID." 
        }
-       ```      
+       ```    
+
+   OR
+
+ * **Error Response:**
+   
+   * **Code:** 404 NOT FOUND <br />
+       **Content:** 
+       ```json
+       {
+         "error" : ""ERROR at PUT: Profile of User [x-uid] not found." 
+       }
+       ```     
+
+   OR 
+
+ * **Error Response:**
+   
+   * **Code:** 500 INTERNAL SERVER ERROR <br />
+       **Content:** 
+       ```json
+       {
+         "error" : "ERROR at PUT Request: Finding Profile failed." 
+       }
+       ```     
+
+   OR
+
+ * **Error Response:**
+   
+   * **Code:** 500 INTERNAL SERVER ERROR <br />
+       **Content:** 
+       ```json
+       {
+         "error" : "ERROR at PUT Request: Operation not successfull" 
+       }
+       ```     
    
    * **Sample JSON mock files:**
    
@@ -632,26 +738,51 @@ DELETE /profiles/id
   * **Code:** 204 NO CONTENT <br />
     **Content:** no content
  
-* **Error Response:**
+ * **Error Response:**
+   
+     * **Code:** 400 BAD REQUEST <br />
+       **Content:** 
+       ```json
+       {
+         "error" : "ERROR at DELETE Request: Please specify a User ID." 
+       }
+       ```    
 
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** 
-    ```json
-    {
-      "error" : "An error occurred." 
-    }
-    ```
+   OR
 
-  OR
-  
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** ``
-    ```json
-    {
-     "error" : "Could not find profile with the id: [id]."
-    }
-    ``` 
+   * **Error Response:**
+   
+    * **Code:** 404 NOT FOUND <br />
+       **Content:** 
+       ```json
+       {
+         "error" : ""ERROR at DELETE: Profile of User [x-uid] not found." 
+       }
+       ```     
 
+      OR 
+
+ * **Error Response:**
+   
+     * **Code:** 500 INTERNAL SERVER ERROR <br />
+       **Content:** 
+       ```json
+       {
+         "error" : "ERROR at DELETE Request: Finding Profile failed." 
+       }
+       ```     
+
+      OR
+
+ * **Error Response:**
+   
+   * **Code:** 500 INTERNAL SERVER ERROR <br />
+       **Content:** 
+       ```json
+       {
+         "error" : "ERROR at DELETE Request: Operation not successfull" 
+       }
+       ```     
 * **Sample JSON mock files:**
 
     `none`
