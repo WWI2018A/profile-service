@@ -116,14 +116,14 @@ router.put('/', function (req, res, next) {
 
     var headerExists = req.header('x-uid');
     if (headerExists !== undefined) {
-        ProfileData.find({ uid: req.header('x-uid') }, function (err, profiles) { //Check if requested User is already listed in Database
+        /*ProfileData.find({ uid: req.header('x-uid') }, function (err, profiles) { //Check if requested User is already listed in Database
             if (err) {
                 res.status(500).json("ERROR at PUT Request: Finding Profile failed")
                 throw err;
                 return next(err);
             } else {
-                if (profiles.length > 0) {
-                    ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { new: true }, function (err, profiles) {
+                if (profiles.length > 0) {*/
+                    ProfileData.findOneAndUpdate({ uid: req.header('x-uid') }, req.body, { upsert: true, new: true }, function (err, profiles) {
                         if (err) {
                             console.log('Put did not work');
                             res.status(500).json("ERROR at PUT Request: Operation not successfull");
@@ -133,12 +133,12 @@ router.put('/', function (req, res, next) {
                             res.status(200).json('data of user ' + req.header('x-uid') + ' was changed');
                         }
                     })
-
+                    /*
                 } else {
-                    res.status(400).json("ERROR at PUT: Profile of User " + req.header('x-uid') + " not found");
+                    res.status(404).json("ERROR at PUT: Profile of User " + req.header('x-uid') + " not found");
                 }
             }
-        })
+        })*/
     } else {
         res.status(400).json("ERROR at PUT Request: Please specify a User ID")
     }
@@ -166,7 +166,7 @@ router.delete('/', function (req, res, next) {
                 if (profiles.length > 0) {
                     ProfileData.findOneAndDelete({ uid: req.header('x-uid') }, function (err, profiles) {
                         if (err) {
-                            res.status(404).json("ERROR at DELETE Request: Finding Profile failed");
+                            res.status(500).json("ERROR at DELETE Request: Operation failed");
                             return next(err)
                         } else {
                             console.log('data of user ' + req.header('x-uid') + ' was deleted');
@@ -181,7 +181,7 @@ router.delete('/', function (req, res, next) {
 
         })
     } else {
-        res.status(404).json("ERROR at DELETE Request: Please specify a User-ID")
+        res.status(400).json("ERROR at DELETE Request: Please specify a User-ID")
     }
 })
 
