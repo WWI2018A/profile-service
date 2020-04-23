@@ -468,9 +468,15 @@ POST /profiles/wallpaper
     
       `none`
 
-  *  **Header Params:**
+    *  **Header Params:**
 
-       `none`
+       **Required:**
+  
+        `x-id:[string]`
+
+      **Optional:**
+  
+        `none`
    
    * **Data Params:**
      
