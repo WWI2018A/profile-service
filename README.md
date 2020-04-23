@@ -114,26 +114,6 @@ Returns all profiles.
  
 * **Error Response:**
 
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** 
-    ```json
-    {
-      "error" : "No matching profile found." 
-    }
-    ```
-    
-  OR
-    
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
-    **Content:** 
-    ```json
-    {
-      "error" : "ERROR at GET Request: Finding Profile failed." 
-    }
-    ```
-    
-   OR
-
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** 
     ```json
