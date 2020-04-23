@@ -131,7 +131,8 @@ Returns all profiles.
       "error" : "ERROR at GET Request: Finding Profile failed." 
     }
     ```
-OR
+    
+   OR
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** 
@@ -225,9 +226,8 @@ GET /profiles/id
     }
     ```
    
-  OR
+   OR
 
- * **Error Response:**
   
    * **Code:** 500 INTERNAL SERVER ERROR <br />
      **Content:** 
@@ -333,9 +333,7 @@ POST /profiles/
        }
        ``` 
 
-  OR
-
- * **Error Response:**
+   OR
    
    * **Code:** 400 BAD REQUEST ERROR <br />
      **Content:** 
@@ -346,8 +344,6 @@ POST /profiles/
        ``` 
 
    OR
-
- * **Error Response:**
    
    * **Code:** 500 INTERNAL SERVER ERROR <br />
      **Content:** 
@@ -358,8 +354,6 @@ POST /profiles/
        ``` 
 
    OR
-
- * **Error Response:**
    
      * **Code:** 500 INTERNAL SERVER ERROR <br />
        **Content:** 
@@ -449,8 +443,6 @@ POST /profiles/picture
        ```   
 
    OR
-
- * **Error Response:**
    
    * **Code:** 400 BAD REQUEST <br />
      **Content:** 
@@ -536,8 +528,6 @@ POST /profiles/wallpaper
        ```
 
    OR
-
- * **Error Response:**
    
    * **Code:** 400 BAD REQUEST <br />
        **Content:** 
@@ -648,8 +638,6 @@ PUT /profiles/id
        ```    
 
    OR
-
- * **Error Response:**
    
    * **Code:** 404 NOT FOUND <br />
        **Content:** 
@@ -660,8 +648,6 @@ PUT /profiles/id
        ```     
 
    OR 
-
- * **Error Response:**
    
    * **Code:** 500 INTERNAL SERVER ERROR <br />
        **Content:** 
@@ -672,8 +658,6 @@ PUT /profiles/id
        ```     
 
    OR
-
- * **Error Response:**
    
    * **Code:** 500 INTERNAL SERVER ERROR <br />
        **Content:** 
@@ -760,9 +744,7 @@ DELETE /profiles/id
        }
        ```     
 
-      OR 
-
- * **Error Response:**
+   OR 
    
      * **Code:** 500 INTERNAL SERVER ERROR <br />
        **Content:** 
@@ -772,9 +754,7 @@ DELETE /profiles/id
        }
        ```     
 
-      OR
-
- * **Error Response:**
+   OR
    
    * **Code:** 500 INTERNAL SERVER ERROR <br />
        **Content:** 
