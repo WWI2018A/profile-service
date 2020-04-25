@@ -43,7 +43,7 @@ mongoose.connect('mongodb://193.196.54.199:27017/db_profile_service', {
 });
 */
 
-mongoose.connect('mongodb://profile_service_user:wwi2018a@193.196.53.122:27017/db_profile_service', {
+mongoose.connect('mongodb://profile_service_user:wwi2018a@193.196.55.190:27017/db_profile_service', {
   useNewUrlParser: true,
   keepAlive: true,
   socketTimeoutMS: 3600000,
